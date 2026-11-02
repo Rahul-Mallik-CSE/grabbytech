@@ -40,8 +40,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   const discount =
     product.originalPrice && product.originalPrice > product.price
       ? Math.round(
-          ((product.originalPrice - product.price) / product.originalPrice) * 100
-        )
+        ((product.originalPrice - product.price) / product.originalPrice) * 100
+      )
       : null;
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -177,12 +177,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             onClick={handleAddToCart}
             disabled={product.stock === 0}
             className={cn(
-              "flex items-center justify-center gap-1.5 h-9 rounded-lg text-xs font-semibold border transition-all active:scale-95",
+              "flex items-center cursor-pointer justify-center gap-1.5 h-9 rounded-lg text-xs font-semibold border transition-all active:scale-95",
               product.stock === 0
                 ? "border-white/10 text-white/20 cursor-not-allowed"
                 : adding
-                ? "border-emerald-500 text-emerald-400 bg-emerald-500/10"
-                : "border-white/20 text-white hover:border-[#FD6603] hover:text-[#FD6603] hover:bg-white/5"
+                  ? "border-emerald-500 text-emerald-400 bg-emerald-500/10"
+                  : "border-white/20 text-white hover:border-[#FD6603] hover:text-[#FD6603] hover:bg-white/5"
             )}
           >
             {adding ? (
@@ -204,7 +204,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             onClick={handleBuyNow}
             disabled={product.stock === 0}
             className={cn(
-              "flex items-center justify-center h-9 rounded-lg text-xs font-semibold text-white transition-all active:scale-95 shadow-sm",
+              "flex items-center cursor-pointer justify-center h-9 rounded-lg text-xs font-semibold text-white transition-all active:scale-95 shadow-sm",
               product.stock === 0
                 ? "bg-white/10 text-white/30 cursor-not-allowed"
                 : "bg-[#FD6603] hover:bg-[#e55b03]"
