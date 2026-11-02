@@ -40,11 +40,14 @@ export default function Footer() {
   return (
     <footer className="bg-black text-white border-t border-white/10 pb-20 md:pb-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          {/* Brand Mark / Logo on Left (like 1st image) */}
-          <div className="col-span-2 md:col-span-1 flex flex-col items-start">
+        
+        {/* Mobile: Centered Stacked Layout | Desktop: 4-Column Grid Layout */}
+        <div className="flex flex-col items-center text-center md:grid md:grid-cols-4 md:items-start md:text-left gap-10 md:gap-12">
+          
+          {/* Brand Mark / Logo Section */}
+          <div className="flex flex-col items-center md:items-start md:col-span-1">
             <Link href="/" className="inline-block mb-4">
-              <div className="relative h-14 w-14 rounded-2xl overflow-hidden border border-white/20 bg-black flex items-center justify-center p-1 shadow-lg">
+              <div className="relative h-14 w-14 overflow-hidden bg-transparent flex items-center justify-center p-1 shadow-lg">
                 <Image
                   src="/grabbytechicon.jpg"
                   alt="GrabbyTech"
@@ -59,7 +62,7 @@ export default function Footer() {
           </div>
 
           {/* Column 1: Policies */}
-          <div>
+          <div className="w-full">
             <h4 className="text-white font-semibold text-sm sm:text-base tracking-wide mb-4">
               Policies
             </h4>
@@ -78,7 +81,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2: About Us */}
-          <div>
+          <div className="w-full">
             <h4 className="text-white font-semibold text-sm sm:text-base tracking-wide mb-4">
               About Us
             </h4>
@@ -97,7 +100,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Connect */}
-          <div>
+          <div className="w-full">
             <h4 className="text-white font-semibold text-sm sm:text-base tracking-wide mb-4">
               Connect
             </h4>
@@ -116,7 +119,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Social Icons row (centered like 1st image) */}
+        {/* Social Icons row (centered) */}
         <div className="flex items-center justify-center gap-7 mt-12 sm:mt-16 pt-8 border-t border-white/10">
           {socials.map(({ icon: Icon, href, label }) => (
             <a
