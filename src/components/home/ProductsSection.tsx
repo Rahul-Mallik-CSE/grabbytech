@@ -41,7 +41,7 @@ export default function ProductsSection() {
         </div>
 
         {/* Product Grid - 2 cols on mobile, up to 5 on wide screens */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
           {visibleProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

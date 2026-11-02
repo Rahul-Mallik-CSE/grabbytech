@@ -7,6 +7,7 @@ import { FiHome, FiGrid, FiShoppingBag, FiUser } from "react-icons/fi";
 import { cn } from "cn";
 import { useCartContext } from "@/context/CartContext";
 import CartSheet from "@/components/cart/CartSheet";
+import { MdProductionQuantityLimits } from "react-icons/md";
 
 export default function MobileBottomNav() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -41,11 +42,11 @@ export default function MobileBottomNav() {
               isCollections ? "text-[#FD6603]" : "text-white/60 hover:text-white"
             )}
           >
-            <FiGrid
+            <MdProductionQuantityLimits
               size={22}
               className={isCollections ? "text-[#FD6603]" : "text-white/70"}
             />
-            <span className="text-[11px] font-medium leading-none">Category</span>
+            <span className="text-[11px] font-medium leading-none">Collections</span>
           </Link>
 
           {/* 3. Cart with Badge */}
