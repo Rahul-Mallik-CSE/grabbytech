@@ -8,24 +8,26 @@ import {
 } from "react-icons/fi";
 import { SiTiktok } from "react-icons/si";
 
-const policyLinks = [
-  { label: "Privacy Policy", href: "#" },
-  { label: "Refund Policy", href: "#" },
-  { label: "Shipping Policy", href: "#" },
-  { label: "Terms of Service", href: "#" },
+
+const quickLinks = [
+  { label: "Home", href: "/" },
+  { label: "Collections", href: "/collections" },
+  { label: "contact", href: "/contact" },
 ];
 
-const aboutLinks = [
-  { label: "Our Story", href: "#" },
-  { label: "Our Sustainability Approach", href: "#" },
-  { label: "About", href: "#" },
+const policyLinks = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Refund Policy", href: "/refund-policy" },
+  { label: "Terms of Service", href: "/terms-of-service" },
 ];
+
+
 
 const connectLinks = [
-  { label: "Contact Us", href: "#" },
-  { label: "Contact Information", href: "#" },
-  { label: "Email", href: "mailto:support@grabbytech.com" },
-  { label: "Regulatory Information", href: "#" },
+  { label: "Contact Us", href: "/contact" },
+  { label: "Tutpara, Khulna", href: "#" },
+  { label: "Phone: +8801951755457", href: "tel:+8801951755457" },
+  { label: "Email: Contact@grabbytech.com", href: "mailto:Contact@grabbytech.com" },
 ];
 
 const socials = [
@@ -61,13 +63,15 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Column 1: Policies */}
+          
+
+          {/* Column 1: About Us */}
           <div className="w-full">
             <h4 className="text-white font-semibold text-sm sm:text-base tracking-wide mb-4">
-              Policies
+              Quick Links
             </h4>
             <ul className="space-y-2.5">
-              {policyLinks.map((l) => (
+              {quickLinks.map((l) => (
                 <li key={l.label}>
                   <Link
                     href={l.href}
@@ -80,13 +84,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 2: About Us */}
+          {/* Column 2: Policies */}
           <div className="w-full">
             <h4 className="text-white font-semibold text-sm sm:text-base tracking-wide mb-4">
-              About Us
+              Policies
             </h4>
             <ul className="space-y-2.5">
-              {aboutLinks.map((l) => (
+              {policyLinks.map((l) => (
                 <li key={l.label}>
                   <Link
                     href={l.href}
