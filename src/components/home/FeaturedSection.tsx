@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   FiTruck,
-  FiShieldCheck,
+  FiShield,
   FiHeadphones,
   FiRefreshCw,
   FiArrowRight,
@@ -15,7 +15,7 @@ const highlights = [
     desc: "কোনো গোপন চার্জ ছাড়া সারা দেশে ফ্রি হোম ডেলিভারি সুবিধা।",
   },
   {
-    icon: FiShieldCheck,
+    icon: FiShield,
     title: "ক্যাশ অন ডেলিভারি (COD)",
     desc: "পণ্য হাতে পেয়ে চেক করে সম্পূর্ণ নিশ্চিন্তে মূল্য পরিশোধ করুন।",
   },

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { CheckoutFormData } from "@/types/AllTypes";
-import { FiArrowRight, FiArrowLeft } from "react-icons/fi";
+import { FiArrowRight, FiArrowLeft, FiMapPin } from "react-icons/fi";
 
 interface AddressStepProps {
   onNext: (data: CheckoutFormData) => void;
@@ -10,8 +10,18 @@ interface AddressStepProps {
 }
 
 const DISTRICTS = [
-  "Dhaka", "Chattogram", "Sylhet", "Rajshahi", "Khulna",
-  "Barishal", "Rangpur", "Mymensingh",
+  "Dhaka (ঢাকা)",
+  "Chattogram (চট্টগ্রাম)",
+  "Sylhet (সিলেট)",
+  "Rajshahi (রাজশাহী)",
+  "Khulna (খুলনা)",
+  "Barishal (বরিশাল)",
+  "Rangpur (রংপুর)",
+  "Mymensingh (ময়মনসিংহ)",
+  "Cumilla (কুমিল্লা)",
+  "Gazipur (গাজীপুর)",
+  "Narayanganj (নারায়ণগঞ্জ)",
+  "Bogura (বগুড়া)",
 ];
 
 export default function AddressStep({ onNext, onBack }: AddressStepProps) {
@@ -29,12 +39,16 @@ export default function AddressStep({ onNext, onBack }: AddressStepProps) {
 
   const validate = () => {
     const e: Partial<CheckoutFormData> = {};
-    if (!form.fullName.trim()) e.fullName = "Name is required";
-    if (!form.phone.match(/^01[3-9]\d{8}$/))
-      e.phone = "Enter a valid BD phone number";
-    if (!form.address.trim()) e.address = "Address is required";
-    if (!form.city.trim()) e.city = "City is required";
-    if (!form.district) e.district = "District is required";
+    if (!form.fullName.trim()) e.fullName = "আপনার নাম লিখুন";
+    if (!form.phone.trim()) {
+      e.phone = "আপনার মোবাইল নম্বর দিন";
+    } else if (!form.phone.replace(/[\s-]/g, "").match(/^(?:\+?88)?01[3-9]\d{8}$/)) {
+      e.phone = "সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন (যেমন: 017XXXXXXXX)";
+    }
+    if (!form.address.trim()) e.address = "সম্পূর্ণ ডেলিভারি ঠিকানা লিখুন";
+    if (!form.city.trim()) e.city = "থানা বা এরিয়ার নাম লিখুন";
+    if (!form.district) e.district = "জেলা সিলেক্ট করুন";
+
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -44,86 +58,166 @@ export default function AddressStep({ onNext, onBack }: AddressStepProps) {
     if (validate()) onNext(form);
   };
 
-  const field = (
-    key: keyof CheckoutFormData,
-    label: string,
-    type = "text",
-    placeholder = ""
-  ) => (
-    <div className="flex flex-col gap-1.5">
-      <label className="text-sm font-medium text-gray-700">{label}</label>
-      <input
-        type={type}
-        value={form[key]}
-        onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-        placeholder={placeholder}
-        className="border border-gray-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#FD6603] focus:ring-2 focus:ring-[#FD6603]/20 transition-all"
-      />
-      {errors[key] && (
-        <span className="text-xs text-red-500">{errors[key]}</span>
-      )}
-    </div>
-  );
-
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-      <h2 className="text-lg font-bold text-gray-900 mb-6">Delivery Address</h2>
-
-      <div className="bg-white rounded-2xl border border-gray-100 p-6 space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {field("fullName", "Full Name *", "text", "Your full name")}
-          {field("phone", "Phone Number *", "tel", "01XXXXXXXXX")}
-        </div>
-        {field("email", "Email (optional)", "email", "you@email.com")}
-        {field("address", "Street Address *", "text", "House, road, area...")}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {field("city", "City / Thana *", "text", "Your city")}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-gray-700">District *</label>
-            <select
-              value={form.district}
-              onChange={(e) => setForm({ ...form, district: e.target.value })}
-              className="border border-gray-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#FD6603] focus:ring-2 focus:ring-[#FD6603]/20 bg-white transition-all"
-            >
-              <option value="">Select district</option>
-              {DISTRICTS.map((d) => (
-                <option key={d} value={d}>{d}</option>
-              ))}
-            </select>
-            {errors.district && (
-              <span className="text-xs text-red-500">{errors.district}</span>
-            )}
+      <div className="bg-white rounded-3xl border border-gray-200/80 p-5 sm:p-8 shadow-xs space-y-6">
+        <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
+          <FiMapPin size={20} className="text-[#FD6603]" />
+          <div>
+            <h2 className="text-base sm:text-lg font-bold text-gray-950">
+              ডেলিভারি ঠিকানা ও তথ্য (Shipping Address)
+            </h2>
+            <p className="text-xs text-gray-500">
+              যে ঠিকানায় আপনার পার্সেল ডেলিভারি করা হবে
+            </p>
           </div>
         </div>
-        {field("postalCode", "Postal Code", "text", "1200")}
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium text-gray-700">Order Notes (optional)</label>
-          <textarea
-            rows={3}
-            value={form.notes}
-            onChange={(e) => setForm({ ...form, notes: e.target.value })}
-            placeholder="Any special instructions..."
-            className="border border-gray-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#FD6603] focus:ring-2 focus:ring-[#FD6603]/20 resize-none transition-all"
-          />
-        </div>
-      </div>
 
-      <div className="flex gap-3 mt-6">
-        <button
-          type="button"
-          onClick={onBack}
-          className="flex items-center gap-2 border border-gray-200 text-gray-600 font-semibold px-6 py-3 rounded-xl text-sm hover:border-gray-300 transition-all"
-        >
-          <FiArrowLeft size={15} /> Back
-        </button>
-        <button
-          type="submit"
-          className="flex-1 flex items-center justify-center gap-2 bg-[#FD6603] hover:bg-[#e55b03] text-white font-semibold py-3 rounded-xl text-sm transition-all active:scale-95"
-        >
-          Continue to Payment <FiArrowRight size={15} />
-        </button>
+        <div className="space-y-4">
+          {/* Full Name & Phone */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label className="text-xs sm:text-sm font-bold text-gray-700">
+                আপনার পুরো নাম *
+              </label>
+              <input
+                type="text"
+                placeholder="যেমন: মোঃ রফিকুল ইসলাম"
+                value={form.fullName}
+                onChange={(e) => setForm({ ...form, fullName: e.target.value })}
+                className="w-full bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-[#FD6603] focus:ring-1 focus:ring-[#FD6603] transition-colors"
+              />
+              {errors.fullName && (
+                <p className="text-[11px] text-red-500 font-medium">
+                  {errors.fullName}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs sm:text-sm font-bold text-gray-700">
+                মোবাইল নম্বর *
+              </label>
+              <input
+                type="tel"
+                placeholder="01XXXXXXXXX"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                className="w-full bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-[#FD6603] focus:ring-1 focus:ring-[#FD6603] transition-colors"
+              />
+              {errors.phone && (
+                <p className="text-[11px] text-red-500 font-medium">{errors.phone}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Email */}
+          <div className="space-y-1.5">
+            <label className="text-xs sm:text-sm font-bold text-gray-700">
+              ইমেইল এড্রেস (ঐচ্ছিক)
+            </label>
+            <input
+              type="email"
+              placeholder="example@gmail.com"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className="w-full bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-[#FD6603] focus:ring-1 focus:ring-[#FD6603] transition-colors"
+            />
+          </div>
+
+          {/* Street Address */}
+          <div className="space-y-1.5">
+            <label className="text-xs sm:text-sm font-bold text-gray-700">
+              সম্পূর্ণ ঠিকানা (বাসা/ফ্ল্যাট, রোড/গ্রাম) *
+            </label>
+            <input
+              type="text"
+              placeholder="যেমন: বাড়ি # ১২, রোড # ৪, সেক্টর # ৭, উত্তরা"
+              value={form.address}
+              onChange={(e) => setForm({ ...form, address: e.target.value })}
+              className="w-full bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-[#FD6603] focus:ring-1 focus:ring-[#FD6603] transition-colors"
+            />
+            {errors.address && (
+              <p className="text-[11px] text-red-500 font-medium">{errors.address}</p>
+            )}
+          </div>
+
+          {/* District & City */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label className="text-xs sm:text-sm font-bold text-gray-700">
+                জেলা (District) *
+              </label>
+              <select
+                value={form.district}
+                onChange={(e) => setForm({ ...form, district: e.target.value })}
+                className="w-full bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-gray-900 outline-none focus:border-[#FD6603] focus:ring-1 focus:ring-[#FD6603] transition-colors cursor-pointer"
+              >
+                <option value="">জেলা সিলেক্ট করুন</option>
+                {DISTRICTS.map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
+              {errors.district && (
+                <p className="text-[11px] text-red-500 font-medium">
+                  {errors.district}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs sm:text-sm font-bold text-gray-700">
+                থানা / এরিয়া *
+              </label>
+              <input
+                type="text"
+                placeholder="যেমন: উত্তরা / গুলশান / ধানমন্ডি"
+                value={form.city}
+                onChange={(e) => setForm({ ...form, city: e.target.value })}
+                className="w-full bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-[#FD6603] focus:ring-1 focus:ring-[#FD6603] transition-colors"
+              />
+              {errors.city && (
+                <p className="text-[11px] text-red-500 font-medium">{errors.city}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Notes */}
+          <div className="space-y-1.5">
+            <label className="text-xs sm:text-sm font-bold text-gray-700">
+              অর্ডার নোট (ঐচ্ছিক)
+            </label>
+            <textarea
+              rows={2}
+              placeholder="ডেলিভারিম্যানের জন্য কোনো বিশেষ নির্দেশনা থাকলে লিখুন..."
+              value={form.notes}
+              onChange={(e) => setForm({ ...form, notes: e.target.value })}
+              className="w-full bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-[#FD6603] focus:ring-1 focus:ring-[#FD6603] transition-colors resize-none"
+            />
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+          <button
+            type="button"
+            onClick={onBack}
+            className="flex items-center justify-center gap-2 border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold px-5 py-3 rounded-xl text-xs sm:text-sm transition-all cursor-pointer"
+          >
+            <FiArrowLeft size={16} /> কার্টে ফেরত
+          </button>
+
+          <button
+            type="submit"
+            className="flex-1 flex items-center justify-center gap-2 bg-[#FD6603] hover:bg-[#e55b03] text-white font-bold py-3.5 rounded-xl text-xs sm:text-sm transition-all active:scale-95 shadow-md shadow-[#FD6603]/30 cursor-pointer"
+          >
+            <span>পেমেন্ট অপশনে যান (Continue to Payment)</span>
+            <FiArrowRight size={16} />
+          </button>
+        </div>
       </div>
     </form>
   );
 }
-

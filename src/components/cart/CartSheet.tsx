@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FiMinus, FiPlus, FiTrash2, FiShoppingBag } from "react-icons/fi";
+import { FiMinus, FiPlus, FiTrash2, FiShoppingBag, FiArrowRight } from "react-icons/fi";
 import {
   Sheet,
   SheetContent,
@@ -23,40 +23,49 @@ function CartItemRow({ item }: { item: CartItem }) {
   const { product, quantity } = item;
 
   return (
-    <div className="flex gap-3 py-4 border-b border-white/10">
-      <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+    <div className="flex gap-3 py-3.5 border-b border-white/10">
+      <div className="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-white/5 border border-white/10">
         <Image
-          src={product.images[0].url}
-          alt={product.images[0].alt}
+          src={product.images[0]?.url || ""}
+          alt={product.images[0]?.alt || product.name}
           fill
           className="object-cover"
           sizes="64px"
         />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-white line-clamp-2 leading-tight">
+        <p className="text-xs sm:text-sm font-medium text-white line-clamp-1 leading-tight">
           {product.name}
         </p>
-        <p className="text-[#FD6603] font-semibold text-sm mt-1">
-          ৳{product.price.toLocaleString()}
+        <p className="text-[#FD6603] font-bold text-xs sm:text-sm mt-1">
+          ৳ {product.price.toLocaleString()}
         </p>
         <div className="flex items-center gap-2 mt-2">
+          <div className="flex items-center border border-white/20 rounded-lg overflow-hidden bg-white/5">
+            <button
+              type="button"
+              onClick={() => updateQuantity(product.id, quantity - 1)}
+              className="w-6 h-6 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+            >
+              <FiMinus size={11} />
+            </button>
+            <span className="text-white text-xs font-semibold w-6 text-center">
+              {quantity}
+            </span>
+            <button
+              type="button"
+              onClick={() => updateQuantity(product.id, quantity + 1)}
+              className="w-6 h-6 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+            >
+              <FiPlus size={11} />
+            </button>
+          </div>
+
           <button
-            onClick={() => updateQuantity(product.id, quantity - 1)}
-            className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-          >
-            <FiMinus size={10} className="text-white" />
-          </button>
-          <span className="text-white text-sm w-5 text-center">{quantity}</span>
-          <button
-            onClick={() => updateQuantity(product.id, quantity + 1)}
-            className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-          >
-            <FiPlus size={10} className="text-white" />
-          </button>
-          <button
+            type="button"
             onClick={() => removeItem(product.id)}
-            className="ml-auto text-red-400 hover:text-red-300 transition-colors"
+            className="ml-auto text-white/40 hover:text-red-400 transition-colors p-1"
+            title="Remove item"
           >
             <FiTrash2 size={14} />
           </button>
@@ -73,36 +82,41 @@ export default function CartSheet({ open, onOpenChange }: CartSheetProps) {
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="right"
-        className="bg-[#111111] border-l border-white/10 w-full sm:max-w-sm flex flex-col p-0"
+        className="bg-[#0e0e0e] border-l border-white/10 w-full sm:max-w-md flex flex-col p-0 z-50 text-white"
       >
         <SheetHeader className="px-5 pt-5 pb-4 border-b border-white/10">
-          <SheetTitle className="text-white flex items-center gap-2">
+          <SheetTitle className="text-white flex items-center gap-2 text-base font-bold">
             <FiShoppingBag size={18} className="text-[#FD6603]" />
-            My Cart
+            <span>আপনার শপিং কার্ট (My Cart)</span>
             {totalItems > 0 && (
-              <span className="ml-auto text-xs bg-[#FD6603] text-white px-2 py-0.5 rounded-full">
-                {totalItems} {totalItems === 1 ? "item" : "items"}
+              <span className="ml-auto text-xs bg-[#FD6603] text-white font-semibold px-2.5 py-0.5 rounded-full">
+                {totalItems} টি পণ্য
               </span>
             )}
           </SheetTitle>
         </SheetHeader>
 
-        {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto px-5">
+        {/* Cart items list */}
+        <div className="flex-1 overflow-y-auto px-5 divide-y divide-white/5">
           {items.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full gap-4 text-center py-16">
-              <FiShoppingBag size={48} className="text-white/20" />
-              <p className="text-white/50 text-sm">Your cart is empty</p>
+            <div className="flex flex-col items-center justify-center h-full gap-4 text-center py-20">
+              <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-white/30 border border-white/10">
+                <FiShoppingBag size={30} />
+              </div>
+              <p className="text-white/60 text-sm font-medium">
+                আপনার কার্ট বর্তমানে খালি আছে
+              </p>
               <Button
+                type="button"
                 onClick={() => onOpenChange(false)}
-                className="bg-[#FD6603] hover:bg-[#e55b03] text-white text-sm"
+                className="bg-[#FD6603] hover:bg-[#e55b03] text-white text-xs font-semibold px-6 rounded-full cursor-pointer"
                 size="sm"
               >
-                Continue Shopping
+                পণ্য দেখুন (Shop Now)
               </Button>
             </div>
           ) : (
-            <div>
+            <div className="py-2">
               {items.map((item) => (
                 <CartItemRow key={item.product.id} item={item} />
               ))}
@@ -110,27 +124,35 @@ export default function CartSheet({ open, onOpenChange }: CartSheetProps) {
           )}
         </div>
 
-        {/* Footer */}
+        {/* Sticky Drawer Footer */}
         {items.length > 0 && (
-          <div className="px-5 py-5 border-t border-white/10 space-y-3">
+          <div className="px-5 py-5 border-t border-white/10 bg-[#090909] space-y-3.5">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-white/60">Subtotal ({totalItems} items)</span>
-              <span className="text-white font-semibold text-base">
-                ৳{totalPrice.toLocaleString()}
+              <span className="text-white/60">মোট সাবটোটাল ({totalItems} টি পণ্য)</span>
+              <span className="text-white font-bold text-base sm:text-lg">
+                ৳ {totalPrice.toLocaleString()}
               </span>
             </div>
-            <p className="text-white/40 text-xs">
-              Free delivery across Bangladesh
-            </p>
-            <Link href="/checkout" onClick={() => onOpenChange(false)}>
-              <Button className="w-full bg-[#FD6603] hover:bg-[#e55b03] text-white font-semibold h-11 rounded-lg text-sm">
-                Proceed to Checkout
-              </Button>
+            <div className="flex items-center justify-between text-xs text-white/50">
+              <span>ডেলিভারি চার্জ</span>
+              <span className="text-emerald-400 font-semibold">ফ্রি (Free)</span>
+            </div>
+
+            <Link
+              href="/checkout"
+              onClick={() => onOpenChange(false)}
+              className="w-full flex items-center justify-center gap-2 bg-[#FD6603] hover:bg-[#e55b03] text-white font-bold py-3.5 rounded-xl text-sm transition-all duration-200 active:scale-95 shadow-md shadow-[#FD6603]/30"
+            >
+              <span>অর্ডার সম্পন্ন করুন (Checkout)</span>
+              <FiArrowRight size={16} />
             </Link>
+
+            <p className="text-white/40 text-[11px] text-center">
+              ক্যাশ অন ডেলিভারি সুবিধা সহ নিরাপদ কেনাকাটা
+            </p>
           </div>
         )}
       </SheetContent>
     </Sheet>
   );
 }
-
