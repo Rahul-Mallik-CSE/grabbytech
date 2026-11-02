@@ -1,5 +1,5 @@
-import ProductsSection from "@/components/home/ProductsSection";
-import FeaturedSection from "@/components/home/FeaturedSection";
+import ProductsSection from "@/components/HomeComponents/ProductsSection";
+import FeaturedSection from "@/components/HomeComponents/FeaturedSection";
 
 export default function HomePage() {
   return (
