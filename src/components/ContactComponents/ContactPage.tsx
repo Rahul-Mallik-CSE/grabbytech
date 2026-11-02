@@ -1,6 +1,6 @@
 import React from "react";
 import { FiMapPin, FiPhone, FiMail, FiClock } from "react-icons/fi";
-import ContactForm from "@/components/contact/ContactForm";
+import ContactForm from "@/components/ContactComponents/ContactForm";
 
 export const metadata = {
   title: "Contact Us - GrabbyTech",

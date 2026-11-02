@@ -3,10 +3,10 @@
 import { useState, useMemo } from "react";
 import { FilterState, ProductCategory, SortOption } from "@/types/AllTypes";
 import { products } from "@/data/productsdata";
-import FilterPanel from "@/components/collections/FilterPanel";
-import FilterSheet from "@/components/collections/FilterSheet";
-import SortBar from "@/components/collections/SortBar";
-import ProductGrid from "@/components/products/ProductGrid";
+import FilterPanel from "@/components/CollectionsComponents/FilterPanel";
+import FilterSheet from "@/components/CollectionsComponents/FilterSheet";
+import SortBar from "@/components/CollectionsComponents/SortBar";
+import ProductGrid from "@/components/ProductsComponents/ProductGrid";
 
 const defaultFilters: FilterState = {
   category: "All",

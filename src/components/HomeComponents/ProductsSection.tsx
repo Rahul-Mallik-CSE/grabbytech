@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { FiArrowRight, FiGrid } from "react-icons/fi";
 import { products } from "@/data/productsdata";
-import ProductCard from "@/components/products/ProductCard";
+import ProductCard from "@/components/ProductsComponents/ProductCard";
 
 const INITIAL_LIMIT = 10;
 

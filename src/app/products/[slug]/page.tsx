@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { products } from "@/data/productsdata";
-import ProductDetailView from "@/components/products/ProductDetailView";
+import ProductDetailView from "@/components/ProductsComponents/ProductDetailView";
 
 export function generateStaticParams() {
   return products.map((p) => ({

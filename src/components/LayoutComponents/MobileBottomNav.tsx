@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { FiHome, FiGrid, FiShoppingBag, FiUser } from "react-icons/fi";
 import { cn } from "cn";
 import { useCartContext } from "@/context/CartContext";
-import CartSheet from "@/components/cart/CartSheet";
+import CartSheet from "@/components/CartComponents/CartSheet";
 import { MdProductionQuantityLimits } from "react-icons/md";
 
 export default function MobileBottomNav() {

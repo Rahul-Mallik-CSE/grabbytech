@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiShoppingCart, FiUser, FiMenu, FiX } from "react-icons/fi";
-import CartSheet from "@/components/cart/CartSheet";
+import CartSheet from "@/components/CartComponents/CartSheet";
 import { useCartContext } from "@/context/CartContext";
 import { cn } from "cn";
 
