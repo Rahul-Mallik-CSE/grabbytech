@@ -18,9 +18,67 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GrabbyTech — Smart Products for a Smarter Life",
+  metadataBase: new URL("https://grabbytech.com"), // Replace with your actual domain
+  title: {
+    default: "GrabbyTech — Smart Gadgets & Innovative Lifestyle Tech in Bangladesh",
+    template: "%s | GrabbyTech",
+  },
   description:
-    "Discover premium gadgets, home tech, and lifestyle accessories. Free home delivery across Bangladesh.",
+    "Discover premium smart gadgets, home tech, and innovative lifestyle accessories at GrabbyTech. Enjoy secure shopping, fast delivery, and top-tier tech across Bangladesh.",
+  keywords: [
+    "GrabbyTech",
+    "Smart Tech Bangladesh",
+    "Gadgets in Bangladesh",
+    "Lifestyle Tech",
+    "Smart Home Gadgets",
+    "Online Tech Store Bangladesh",
+  ],
+  authors: [{ name: "GrabbyTech" }],
+  creator: "GrabbyTech",
+  publisher: "GrabbyTech",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://grabbytech.com",
+    title: "GrabbyTech — Smart Gadgets & Innovative Lifestyle Tech",
+    description:
+      "Discover premium smart gadgets, home tech, and lifestyle accessories at GrabbyTech. Shop the latest tech essentials in Bangladesh.",
+    siteName: "GrabbyTech",
+    images: [
+      {
+        url: "/grabbytechLogo.jpg", // Make sure this image exists in your public folder
+        width: 1200,
+        height: 630,
+        alt: "GrabbyTech - Smart Products for a Smarter Life",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GrabbyTech — Smart Gadgets & Innovative Lifestyle Tech",
+    description:
+      "Discover premium smart gadgets, home tech, and lifestyle accessories at GrabbyTech. Shop the latest tech essentials in Bangladesh.",
+    images: ["/grabbytechLogo.jpg"],
+  },
+  alternates: {
+    canonical: "https://grabbytech.com",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
