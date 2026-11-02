@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { CheckoutFormData, CheckoutStep } from "@/types/AllTypes";
-import CheckoutStepper from "@/components/checkout/CheckoutStepper";
-import CartStep from "@/components/checkout/CartStep";
-import AddressStep from "@/components/checkout/AddressStep";
-import PaymentStep from "@/components/checkout/PaymentStep";
+import CheckoutStepper from "@/components/CheckoutComponents/CheckoutStepper";
+import CartStep from "@/components/CheckoutComponents/CartStep";
+import AddressStep from "@/components/CheckoutComponents/AddressStep";
+import PaymentStep from "@/components/CheckoutComponents/PaymentStep";
 
 export default function CheckoutPage() {
   const [step, setStep] = useState<CheckoutStep>("cart");
