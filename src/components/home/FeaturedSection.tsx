@@ -11,23 +11,23 @@ import {
 const highlights = [
   {
     icon: FiTruck,
-    title: "সারা বাংলাদেশে ফ্রি ডেলিভারি",
-    desc: "কোনো গোপন চার্জ ছাড়া সারা দেশে ফ্রি হোম ডেলিভারি সুবিধা।",
+    title: "Free Delivery Nationwide",
+    desc: "Enjoy 100% free home delivery across Bangladesh with no hidden charges.",
   },
   {
     icon: FiShield,
-    title: "ক্যাশ অন ডেলিভারি (COD)",
-    desc: "পণ্য হাতে পেয়ে চেক করে সম্পূর্ণ নিশ্চিন্তে মূল্য পরিশোধ করুন।",
+    title: "Cash on Delivery (COD)",
+    desc: "Pay easily at your doorstep only after receiving and inspecting your package.",
   },
   {
     icon: FiRefreshCw,
-    title: "সহজ রিটার্ন পলিসি",
-    desc: "পণ্যে কোনো সমস্যা থাকলে ঝামেলাহীন রিপ্লেসমেন্ট গ্যারান্টি।",
+    title: "Easy 7-Day Replacement",
+    desc: "Hassle-free replacement guarantee if you encounter any manufacturer defects.",
   },
   {
     icon: FiHeadphones,
-    title: "২৪/৭ কাস্টমার সাপোর্ট",
-    desc: "যেকোনো প্রশ্ন বা তথ্যের জন্য আমাদের টিম সার্বক্ষণিক প্রস্তুত।",
+    title: "24/7 Dedicated Support",
+    desc: "Our customer service team is always available to help with any inquiries.",
   },
 ];
 
@@ -41,10 +41,10 @@ export default function FeaturedSection() {
             Why GrabbyTech
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">
-            স্মার্ট লাইফস্টাইলের বিশ্বস্ত সঙ্গী
+            Your Trusted Partner in Smart Living
           </h2>
           <p className="text-white/60 text-xs sm:text-sm mt-3 leading-relaxed">
-            আমরা নিশ্চিত করি আন্তর্জাতিক মানের স্মার্ট গ্যাজেট, অথেন্টিক প্রডাক্ট এবং দ্রুততম গ্রাহক সেবা।
+            We provide high-grade smart tech, 100% authentic products, and swift customer care.
           </p>
         </div>
 
@@ -76,13 +76,13 @@ export default function FeaturedSection() {
             <div className="max-w-xl">
               <div className="flex items-center gap-2 text-[#FD6603] text-xs font-bold uppercase tracking-wider mb-2">
                 <FiCheckCircle size={15} />
-                <span>অরিজিনাল কোয়ালিটি নিশ্চয়তা</span>
+                <span>100% Authentic Quality Guaranteed</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-                আপনার প্রয়োজনীয় গ্যাজেটটি বেছে নিন এখনই
+                Upgrade Your Everyday Gear Today
               </h3>
               <p className="text-white/60 text-xs sm:text-sm mt-2 leading-relaxed">
-                সহজ অর্ডার প্রক্রিয়া এবং দ্রুত ডেলিভারি সহ ক্যাশ অন ডেলিভারিতে শপিং করুন আপনার পছন্দের পণ্য।
+                Seamless order process, speedy delivery, and secure Cash on Delivery right to your doorstep.
               </p>
             </div>
 
@@ -90,7 +90,7 @@ export default function FeaturedSection() {
               href="/collections"
               className="inline-flex items-center justify-center gap-2 bg-[#FD6603] hover:bg-[#e55b03] text-white font-bold text-sm px-8 py-4 rounded-full transition-all duration-200 active:scale-95 shadow-lg shadow-[#FD6603]/30 whitespace-nowrap"
             >
-              <span>সকল পণ্য দেখুন</span>
+              <span>Shop All Products</span>
               <FiArrowRight size={16} />
             </Link>
           </div>

@@ -8,8 +8,6 @@ import {
   FiArrowLeft,
   FiCheck,
   FiMapPin,
-  FiPhone,
-  FiUser,
   FiCheckCircle,
   FiTruck,
   FiShoppingBag,
@@ -49,34 +47,34 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
 
         <div>
           <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider">
-            অর্ডার সফল হয়েছে!
+            Order Placed Successfully!
           </span>
           <h2 className="text-xl sm:text-2xl font-extrabold text-gray-950 mt-2">
-            ধন্যবাদ! আপনার অর্ডারটি গ্রহণ করা হয়েছে
+            Thank You! Your order has been placed.
           </h2>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
-            অর্ডার আইডি: <span className="font-mono font-bold text-gray-900">{orderId}</span>
+            Order ID: <span className="font-mono font-bold text-gray-900">{orderId}</span>
           </p>
         </div>
 
         <div className="bg-gray-50 rounded-2xl p-4 text-left text-xs sm:text-sm text-gray-700 space-y-2 border border-gray-200/60">
           <div className="flex items-center gap-2 font-semibold text-gray-900 pb-2 border-b border-gray-200">
             <FiTruck className="text-[#FD6603]" />
-            <span>ক্যাশ অন ডেলিভারি নিশ্চিতকরণ</span>
+            <span>Cash on Delivery Confirmation</span>
           </div>
           <p>
-            <b className="text-gray-900">প্রাপক:</b> {address.fullName} ({address.phone})
+            <b className="text-gray-900">Recipient:</b> {address.fullName} ({address.phone})
           </p>
           <p>
-            <b className="text-gray-900">ডেলিভারি ঠিকানা:</b> {address.address}, {address.city}, {address.district}
+            <b className="text-gray-900">Delivery Address:</b> {address.address}, {address.city}, {address.district}
           </p>
           <p className="text-emerald-700 font-bold pt-1">
-            পণ্য হাতে পেয়ে ৳ {totalPrice.toLocaleString()} টাকা পরিশোধ করুন।
+            Please pay Tk {totalPrice.toLocaleString()} upon receiving your order.
           </p>
         </div>
 
         <p className="text-xs text-gray-500">
-          আমাদের প্রতিনিধি শীঘ্রই ফোন করে আপনার অর্ডারটি কনফার্ম করবেন।
+          Our customer service team will contact you shortly to confirm your delivery schedule.
         </p>
 
         <div className="pt-2">
@@ -84,7 +82,7 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
             href="/"
             className="inline-flex items-center justify-center gap-2 bg-[#FD6603] hover:bg-[#e55b03] text-white font-bold text-xs sm:text-sm px-8 py-3.5 rounded-full transition-all active:scale-95 shadow-md shadow-[#FD6603]/30"
           >
-            <FiShoppingBag size={16} /> হোম পেজে ফিরে যান
+            <FiShoppingBag size={16} /> Back to Homepage
           </Link>
         </div>
       </div>
@@ -96,10 +94,10 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
       <div className="bg-white rounded-3xl border border-gray-200/80 p-5 sm:p-8 shadow-xs space-y-6">
         <div>
           <h2 className="text-base sm:text-lg font-bold text-gray-950">
-            অর্ডার ও পেমেন্ট রিভিউ (Order Review & Payment)
+            Order Review & Payment
           </h2>
           <p className="text-xs text-gray-500 mt-0.5">
-            অনুগ্রহ করে তথ্যগুলো যাচাই করে অর্ডার নিশ্চিত করুন
+            Please verify your delivery details and confirm your order
           </p>
         </div>
 
@@ -107,14 +105,14 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
         <div className="bg-gray-50 rounded-2xl p-4 sm:p-5 border border-gray-200/80 space-y-2.5">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
-              <FiMapPin className="text-[#FD6603]" /> ডেলিভারি ঠিকানা
+              <FiMapPin className="text-[#FD6603]" /> Delivery Address
             </span>
             <button
               type="button"
               onClick={onBack}
               className="text-xs text-[#FD6603] font-semibold hover:underline"
             >
-              পরিবর্তন করুন
+              Change
             </button>
           </div>
 
@@ -126,7 +124,7 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
               {address.address}, {address.city}, {address.district}
             </p>
             {address.notes ? (
-              <p className="text-gray-500 italic text-[11px]">নোট: {address.notes}</p>
+              <p className="text-gray-500 italic text-[11px]">Note: {address.notes}</p>
             ) : null}
           </div>
         </div>
@@ -134,7 +132,7 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
         {/* Selected Products Preview */}
         <div className="space-y-3">
           <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-            অর্ডার আইটেম ({totalItems} টি পণ্য)
+            Order Items ({totalItems} {totalItems === 1 ? "item" : "items"})
           </p>
           <div className="divide-y divide-gray-100 max-h-56 overflow-y-auto pr-1">
             {items.map(({ product, quantity }) => (
@@ -147,31 +145,31 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
                     {product.name}
                   </p>
                   <p className="text-gray-400 text-[11px]">
-                    পরিমাণ: {quantity} × ৳ {product.price.toLocaleString()}
+                    Qty: {quantity} × Tk {product.price.toLocaleString()}
                   </p>
                 </div>
                 <span className="font-bold text-gray-900 flex-shrink-0">
-                  ৳ {(product.price * quantity).toLocaleString()}
+                  Tk {(product.price * quantity).toLocaleString()}
                 </span>
               </div>
             ))}
           </div>
 
           <div className="pt-3 border-t border-gray-200 flex items-center justify-between text-xs sm:text-sm">
-            <span className="text-gray-600">ডেলিভারি চার্জ</span>
-            <span className="text-emerald-600 font-bold">ফ্রি (Free Delivery)</span>
+            <span className="text-gray-600">Delivery Fee</span>
+            <span className="text-emerald-600 font-bold">Free Delivery</span>
           </div>
 
           <div className="flex items-center justify-between text-base sm:text-lg font-black text-gray-950 pt-1">
-            <span>সর্বমোট পরিশোধযোগ্য:</span>
-            <span className="text-[#FD6603]">৳ {totalPrice.toLocaleString()}</span>
+            <span>Total Payable:</span>
+            <span className="text-[#FD6603]">Tk {totalPrice.toLocaleString()}</span>
           </div>
         </div>
 
         {/* Payment Method - Cash on Delivery */}
         <div className="space-y-2 pt-2 border-t border-gray-100">
           <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-            পেমেন্ট মেথড (Payment Method)
+            Payment Method
           </p>
           
           <div className="border-2 border-[#FD6603] bg-[#FD6603]/5 rounded-2xl p-4 flex items-center gap-3">
@@ -181,14 +179,14 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <span className="text-xs sm:text-sm font-bold text-gray-950">
-                  ক্যাশ অন ডেলিভারি (Cash on Delivery)
+                  Cash on Delivery (COD)
                 </span>
                 <span className="bg-[#FD6603] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                  সক্রিয়
+                  Active
                 </span>
               </div>
               <p className="text-[11px] sm:text-xs text-gray-600 mt-0.5">
-                কোনো অগ্রিম পেমেন্ট নেই — পণ্য ডেলিভারিম্যানের কাছ থেকে বুঝে পেয়ে মূল্য পরিশোধ করুন।
+                No advance payment required. Pay safely in cash once your package arrives.
               </p>
             </div>
           </div>
@@ -201,7 +199,7 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
             onClick={onBack}
             className="flex items-center justify-center gap-2 border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold px-5 py-3 rounded-xl text-xs sm:text-sm transition-all cursor-pointer"
           >
-            <FiArrowLeft size={16} /> ঠিকানায় ফেরত
+            <FiArrowLeft size={16} /> Back to Address
           </button>
 
           <button
@@ -213,12 +211,12 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
             {placing ? (
               <>
                 <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                <span>অর্ডার প্রসেস হচ্ছে...</span>
+                <span>Processing Order...</span>
               </>
             ) : (
               <>
                 <FiCheckCircle size={18} />
-                <span>অর্ডার নিশ্চিত করুন (ক্যাশ অন ডেলিভারি)</span>
+                <span>Confirm Order (Cash on Delivery)</span>
               </>
             )}
           </button>

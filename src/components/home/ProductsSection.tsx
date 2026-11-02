@@ -26,7 +26,7 @@ export default function ProductsSection() {
               </p>
             </div>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-950 mt-1">
-              ফিচার্ড গ্যাজেট ও পণ্যসমূহ
+              Featured Gadgets & Tech
             </h2>
           </div>
 
@@ -35,7 +35,7 @@ export default function ProductsSection() {
             className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 hover:text-[#FD6603] font-semibold transition-colors px-3 py-1.5 rounded-lg hover:bg-gray-50"
           >
             <FiGrid size={15} />
-            <span className="hidden sm:inline">সকল কালেকশন</span>
+            <span className="hidden sm:inline">All Collections</span>
             <FiArrowRight size={14} />
           </Link>
         </div>
@@ -55,7 +55,7 @@ export default function ProductsSection() {
               onClick={() => setShowAll((prev) => !prev)}
               className="inline-flex items-center justify-center gap-2 bg-[#FD6603] hover:bg-[#e55b03] text-white font-bold text-xs sm:text-sm px-8 py-3.5 rounded-full transition-all duration-200 active:scale-95 shadow-md shadow-[#FD6603]/25 cursor-pointer"
             >
-              <span>{showAll ? "কম দেখান (Show Less)" : `আরও পণ্য দেখুন (${products.length - INITIAL_LIMIT}+ More)`}</span>
+              <span>{showAll ? "Show Less" : `See More Products (${products.length - INITIAL_LIMIT}+ More)`}</span>
               <FiArrowRight
                 size={16}
                 className={showAll ? "-rotate-90 transition-transform" : "transition-transform"}

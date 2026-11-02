@@ -24,7 +24,7 @@ export default function FilterSheet({ filters, onChange }: FilterSheetProps) {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger className="flex items-center gap-2 border border-gray-200 bg-white text-gray-800 rounded-full px-4 py-2 text-xs sm:text-sm font-semibold hover:border-[#FD6603] hover:text-[#FD6603] transition-colors shadow-xs">
         <FiSliders size={14} className="text-[#FD6603]" />
-        <span>ফিল্টারসমূহ</span>
+        <span>Filters</span>
       </SheetTrigger>
       <SheetContent
         side="left"
@@ -32,7 +32,7 @@ export default function FilterSheet({ filters, onChange }: FilterSheetProps) {
       >
         <SheetHeader className="px-5 py-4 border-b border-gray-100 flex flex-row items-center justify-between">
           <SheetTitle className="text-gray-900 font-bold text-base">
-            ফিল্টার করুন
+            Filter Products
           </SheetTitle>
         </SheetHeader>
         <div className="p-4">

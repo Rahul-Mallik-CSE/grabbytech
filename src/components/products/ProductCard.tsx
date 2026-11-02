@@ -160,11 +160,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Price Row (like 4th & 5th image) */}
         <div className="flex items-baseline gap-2 mt-auto pt-1">
           <span className="text-sm sm:text-base font-bold text-white">
-            ৳ {product.price.toLocaleString()}
+            Tk {product.price.toLocaleString()}
           </span>
           {product.originalPrice && (
             <span className="text-xs text-white/40 line-through">
-              ৳ {product.originalPrice.toLocaleString()}
+              Tk {product.originalPrice.toLocaleString()}
             </span>
           )}
         </div>
@@ -188,12 +188,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             {adding ? (
               <>
                 <FiCheck size={12} className="text-emerald-400" />
-                <span>যুক্ত</span>
+                <span>Added</span>
               </>
             ) : (
               <>
                 <FiShoppingCart size={13} />
-                <span>কার্ট</span>
+                <span>Cart</span>
               </>
             )}
           </button>
@@ -210,7 +210,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 : "bg-[#FD6603] hover:bg-[#e55b03]"
             )}
           >
-            {product.stock === 0 ? "স্টক নেই" : "কিনুন"}
+            {product.stock === 0 ? "Sold Out" : "Buy Now"}
           </button>
         </div>
       </div>

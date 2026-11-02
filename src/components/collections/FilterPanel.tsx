@@ -26,11 +26,11 @@ export default function FilterPanel({ filters, onChange }: FilterPanelProps) {
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200/80 p-5 shadow-xs space-y-6">
-      {/* Header: ফিল্টারসমূহ */}
+      {/* Header: Filters */}
       <div className="flex items-center justify-between pb-3 border-b border-gray-100">
         <div className="flex items-center gap-2 text-gray-900 font-bold text-base">
           <FiSliders size={18} className="text-[#FD6603]" />
-          <span>ফিল্টারসমূহ</span>
+          <span>Filters</span>
         </div>
 
         <button
@@ -45,20 +45,20 @@ export default function FilterPanel({ filters, onChange }: FilterPanelProps) {
             })
           }
           className="text-xs text-gray-400 hover:text-[#FD6603] flex items-center gap-1 transition-colors"
-          title="রিসেট করুন"
+          title="Reset filters"
         >
           <FiRotateCcw size={12} />
-          <span>রিসেট</span>
+          <span>Reset</span>
         </button>
       </div>
 
-      {/* Category: ক্যাটাগরি */}
+      {/* Category */}
       <div>
-        <h4 className="text-gray-900 font-bold text-sm mb-3">ক্যাটাগরি</h4>
+        <h4 className="text-gray-900 font-bold text-sm mb-3">Category</h4>
         <ul className="space-y-1">
           {CATEGORIES.map((cat) => {
             const active = filters.category === cat;
-            const displayName = cat === "All" ? "সকল ক্যাটাগরি" : cat;
+            const displayName = cat === "All" ? "All Categories" : cat;
             const count = getCategoryCount(cat);
 
             return (
@@ -91,9 +91,9 @@ export default function FilterPanel({ filters, onChange }: FilterPanelProps) {
         </ul>
       </div>
 
-      {/* Stock Status: স্টক স্ট্যাটাস */}
+      {/* Stock Status */}
       <div className="pt-2 border-t border-gray-100">
-        <h4 className="text-gray-900 font-bold text-sm mb-3">স্টক স্ট্যাটাস</h4>
+        <h4 className="text-gray-900 font-bold text-sm mb-3">Stock Status</h4>
         <label className="flex items-center gap-2.5 cursor-pointer select-none">
           <input
             type="checkbox"
@@ -101,17 +101,17 @@ export default function FilterPanel({ filters, onChange }: FilterPanelProps) {
             onChange={(e) => set({ inStockOnly: e.target.checked })}
             className="w-4 h-4 accent-[#FD6603] rounded border-gray-300 text-[#FD6603] focus:ring-[#FD6603]"
           />
-          <span className="text-sm text-gray-700">শুধুমাত্র স্টকে থাকা পণ্য</span>
+          <span className="text-sm text-gray-700">In-stock products only</span>
         </label>
       </div>
 
-      {/* Brand: ব্র্যান্ড */}
+      {/* Brand */}
       <div className="pt-2 border-t border-gray-100">
-        <h4 className="text-gray-900 font-bold text-sm mb-3">ব্র্যান্ড</h4>
+        <h4 className="text-gray-900 font-bold text-sm mb-3">Brand</h4>
         <ul className="space-y-1">
           {BRANDS.map((brand) => {
             const active = filters.brand === brand;
-            const displayName = brand === "All" ? "সকল ব্র্যান্ড" : brand;
+            const displayName = brand === "All" ? "All Brands" : brand;
             const count = getBrandCount(brand);
 
             return (
@@ -135,14 +135,14 @@ export default function FilterPanel({ filters, onChange }: FilterPanelProps) {
         </ul>
       </div>
 
-      {/* Price Range: মূল্য পরিসীমা (৳) */}
+      {/* Price Range */}
       <div className="pt-2 border-t border-gray-100">
-        <h4 className="text-gray-900 font-bold text-sm mb-3">মূল্য পরিসীমা (৳)</h4>
+        <h4 className="text-gray-900 font-bold text-sm mb-3">Price Range (Tk)</h4>
         <div className="grid grid-cols-2 gap-2">
           <div>
             <input
               type="number"
-              placeholder="ন্যূনতম"
+              placeholder="Min"
               value={filters.minPrice}
               onChange={(e) =>
                 set({
@@ -155,7 +155,7 @@ export default function FilterPanel({ filters, onChange }: FilterPanelProps) {
           <div>
             <input
               type="number"
-              placeholder="সর্বোচ্চ"
+              placeholder="Max"
               value={filters.maxPrice}
               onChange={(e) =>
                 set({

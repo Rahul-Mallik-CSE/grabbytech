@@ -3,11 +3,11 @@
 import { SortOption, FilterState } from "@/types/AllTypes";
 
 const SORT_OPTIONS: { label: string; value: SortOption }[] = [
-  { label: "জনপ্রিয় (Featured)", value: "featured" },
-  { label: "মূল্য: কম থেকে বেশি", value: "price-asc" },
-  { label: "মূল্য: বেশি থেকে কম", value: "price-desc" },
-  { label: "সর্বোচ্চ রেটিং (Top Rated)", value: "rating" },
-  { label: "নতুন পণ্য (Newest)", value: "newest" },
+  { label: "Featured", value: "featured" },
+  { label: "Price: Low to High", value: "price-asc" },
+  { label: "Price: High to Low", value: "price-desc" },
+  { label: "Top Rated", value: "rating" },
+  { label: "Newest", value: "newest" },
 ];
 
 interface SortBarProps {
@@ -20,11 +20,11 @@ export default function SortBar({ filters, onChange, count }: SortBarProps) {
   return (
     <div className="flex items-center justify-between gap-2 bg-white px-4 py-2.5 rounded-xl border border-gray-200/80 shadow-xs">
       <p className="text-xs sm:text-sm text-gray-600 font-medium whitespace-nowrap">
-        মোট <span className="font-bold text-gray-900">{count}</span> টি পণ্য
+        Showing <span className="font-bold text-gray-900">{count}</span> {count === 1 ? "Product" : "Products"}
       </p>
       <div className="flex items-center gap-1.5 min-w-0">
         <label className="text-xs sm:text-sm text-gray-500 hidden sm:inline whitespace-nowrap">
-          সর্ট করুন:
+          Sort by:
         </label>
         <select
           value={filters.sortBy}

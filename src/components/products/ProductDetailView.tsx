@@ -35,7 +35,7 @@ function StarRating({ rating, count }: { rating: number; count: number }) {
         ))}
       </div>
       <span className="text-xs sm:text-sm text-gray-500 font-medium">
-        {rating} ({count} গ্রাহক রিভিউ)
+        {rating} ({count} Customer Reviews)
       </span>
     </div>
   );
@@ -93,7 +93,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
           href="/collections"
           className="inline-flex items-center gap-2 text-xs sm:text-sm text-gray-600 hover:text-[#FD6603] mb-6 transition-colors font-medium"
         >
-          <FiArrowLeft size={16} /> সকল পণ্যে ফিরে যান
+          <FiArrowLeft size={16} /> Back to all products
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 bg-white rounded-3xl border border-gray-200/80 p-5 sm:p-8 md:p-10 shadow-xs">
@@ -113,14 +113,14 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
               {product.stock === 0 ? (
                 <div className="absolute inset-0 bg-black/70 backdrop-blur-xs flex items-center justify-center">
                   <span className="text-white font-bold text-lg bg-red-600/90 px-4 py-1.5 rounded-full">
-                    স্টক শেষ (Sold Out)
+                    Sold Out
                   </span>
                 </div>
               ) : null}
 
               {discount && product.stock > 0 ? (
                 <span className="absolute top-4 left-4 bg-[#FD6603] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                  -{discount}% ছাড়
+                  -{discount}% OFF
                 </span>
               ) : null}
             </div>
@@ -159,7 +159,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                 {product.category}
               </span>
               <span className="text-[11px] font-bold text-white bg-black px-2.5 py-1 rounded-md">
-                ব্র্যান্ড: {product.brand}
+                Brand: {product.brand}
               </span>
               {product.badge && product.stock > 0 && (
                 <span className="text-[11px] font-bold bg-[#FD6603] text-white px-2.5 py-1 rounded-md">
@@ -179,16 +179,16 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
             {/* Pricing Section */}
             <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200/80 flex items-baseline gap-3">
               <span className="text-2xl sm:text-3xl font-black text-gray-950">
-                ৳ {product.price.toLocaleString()}
+                Tk {product.price.toLocaleString()}
               </span>
               {product.originalPrice && (
                 <span className="text-sm sm:text-base text-gray-400 line-through">
-                  ৳ {product.originalPrice.toLocaleString()}
+                  Tk {product.originalPrice.toLocaleString()}
                 </span>
               )}
               {discount && (
                 <span className="text-xs sm:text-sm font-bold text-[#FD6603] ml-auto">
-                  সাশ্রয়: ৳ {(product.originalPrice! - product.price).toLocaleString()} ({discount}%)
+                  Save: Tk {(product.originalPrice! - product.price).toLocaleString()} ({discount}%)
                 </span>
               )}
             </div>
@@ -201,7 +201,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
             {/* Feature Bullets */}
             <div className="space-y-2 py-2 border-y border-gray-100">
               <p className="text-xs font-bold text-gray-900 uppercase tracking-wide">
-                প্রধান বৈশিষ্ট্যাবলী:
+                Key Features:
               </p>
               {product.features.map((f) => (
                 <div key={f} className="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
@@ -216,11 +216,11 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
               {product.stock > 0 ? (
                 <span className="inline-flex items-center gap-1.5 text-emerald-600 text-xs sm:text-sm font-semibold">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  স্টকে রয়েছে ({product.stock} টি পণ্য বিদ্যমান)
+                  In Stock ({product.stock} units available)
                 </span>
               ) : (
                 <span className="text-red-500 text-xs sm:text-sm font-bold">
-                  বর্তমানে স্টক নেই
+                  Currently Out of Stock
                 </span>
               )}
             </div>
@@ -230,7 +230,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
               <div className="space-y-4 pt-2">
                 <div className="flex items-center gap-4">
                   <span className="text-xs sm:text-sm font-semibold text-gray-700">
-                    পরিমাণ:
+                    Quantity:
                   </span>
                   <div className="flex items-center border border-gray-300 rounded-xl overflow-hidden bg-white">
                     <button
@@ -268,11 +268,11 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                   >
                     {added ? (
                       <>
-                        <FiCheck size={16} /> কার্টে যুক্ত হয়েছে
+                        <FiCheck size={16} /> Added to Cart
                       </>
                     ) : (
                       <>
-                        <FiShoppingCart size={16} /> কার্টে যোগ করুন
+                        <FiShoppingCart size={16} /> Add to Cart
                       </>
                     )}
                   </button>
@@ -283,7 +283,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                     onClick={handleBuyNow}
                     className="flex items-center justify-center gap-2 bg-[#FD6603] hover:bg-[#e55b03] text-white py-3.5 rounded-xl text-xs sm:text-sm font-bold transition-all active:scale-95 shadow-md shadow-[#FD6603]/30 cursor-pointer"
                   >
-                    এখনই কিনুন (Buy Now)
+                    Buy Now
                   </button>
                 </div>
               </div>
@@ -294,19 +294,19 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
               <div className="p-2.5 rounded-xl bg-gray-50 flex flex-col items-center gap-1">
                 <FiTruck size={18} className="text-[#FD6603]" />
                 <span className="text-[10px] sm:text-xs font-semibold text-gray-700">
-                  ফ্রি হোম ডেলিভারি
+                  Free Delivery
                 </span>
               </div>
               <div className="p-2.5 rounded-xl bg-gray-50 flex flex-col items-center gap-1">
                 <FiShield size={18} className="text-[#FD6603]" />
                 <span className="text-[10px] sm:text-xs font-semibold text-gray-700">
-                  ক্যাশ অন ডেলিভারি
+                  Cash on Delivery
                 </span>
               </div>
               <div className="p-2.5 rounded-xl bg-gray-50 flex flex-col items-center gap-1">
                 <FiRotateCcw size={18} className="text-[#FD6603]" />
                 <span className="text-[10px] sm:text-xs font-semibold text-gray-700">
-                  ৭ দিনের ওয়ারেন্টি
+                  7-Day Warranty
                 </span>
               </div>
             </div>
@@ -316,7 +316,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
         {/* Detailed Description */}
         <div className="mt-8 sm:mt-12 bg-white rounded-3xl border border-gray-200/80 p-6 sm:p-10">
           <h2 className="text-lg sm:text-xl font-bold text-gray-950 mb-4 pb-3 border-b border-gray-100">
-            পণ্যের বিস্তারিত বিবরণ (Product Description)
+            Product Description
           </h2>
           <p className="text-gray-700 text-xs sm:text-sm leading-relaxed whitespace-pre-line">
             {product.description}

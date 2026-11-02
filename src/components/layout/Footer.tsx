@@ -54,7 +54,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-white/50 text-xs sm:text-sm leading-relaxed max-w-xs">
-              স্মার্ট লাইফস্টাইল ও টেকনোলজি সমাধানের জন্য বাংলাদেশের বিশ্বস্ত ব্র্যান্ড।
+              Your trusted destination for smart lifestyle tech and innovative everyday essentials.
             </p>
           </div>
 

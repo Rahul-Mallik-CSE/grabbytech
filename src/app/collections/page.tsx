@@ -68,10 +68,10 @@ export default function CollectionsPage() {
       <div className="bg-black border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
           <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            সকল কালেকশন (All Collections)
+            All Collections
           </h1>
           <p className="text-white/60 text-xs sm:text-sm mt-1">
-            প্রিমিয়াম গ্যাজেট ও লাইফস্টাইল অ্যাক্সেসরিজ কালেকশন
+            Explore our premium range of smart gadgets, tech, and lifestyle gear
           </p>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default function CollectionsPage() {
           <div className="flex items-center justify-between gap-2">
             <FilterSheet filters={filters} onChange={setFilters} />
             <span className="text-xs text-gray-500 font-medium">
-              পণ্য: <b className="text-gray-900">{filtered.length}</b>
+              Products: <b className="text-gray-900">{filtered.length}</b>
             </span>
           </div>
           <SortBar filters={filters} onChange={setFilters} count={filtered.length} />

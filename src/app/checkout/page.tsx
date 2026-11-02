@@ -17,10 +17,10 @@ export default function CheckoutPage() {
       <div className="bg-black border-b border-white/10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-            চেকআউট প্রক্রিয়া (Secure Checkout)
+            Secure Checkout
           </h1>
           <p className="text-white/60 text-xs sm:text-sm mt-1">
-            সহজ ৩টি ধাপে ক্যাশ অন ডেলিভারিতে অর্ডার সম্পন্ন করুন
+            Complete your order in 3 simple steps with Cash on Delivery
           </p>
         </div>
       </div>

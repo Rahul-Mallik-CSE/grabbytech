@@ -38,7 +38,7 @@ function CartItemRow({ item }: { item: CartItem }) {
           {product.name}
         </p>
         <p className="text-[#FD6603] font-bold text-xs sm:text-sm mt-1">
-          ৳ {product.price.toLocaleString()}
+          Tk {product.price.toLocaleString()}
         </p>
         <div className="flex items-center gap-2 mt-2">
           <div className="flex items-center border border-white/20 rounded-lg overflow-hidden bg-white/5">
@@ -87,10 +87,10 @@ export default function CartSheet({ open, onOpenChange }: CartSheetProps) {
         <SheetHeader className="px-5 pt-5 pb-4 border-b border-white/10">
           <SheetTitle className="text-white flex items-center gap-2 text-base font-bold">
             <FiShoppingBag size={18} className="text-[#FD6603]" />
-            <span>আপনার শপিং কার্ট (My Cart)</span>
+            <span>My Shopping Cart</span>
             {totalItems > 0 && (
               <span className="ml-auto text-xs bg-[#FD6603] text-white font-semibold px-2.5 py-0.5 rounded-full">
-                {totalItems} টি পণ্য
+                {totalItems} {totalItems === 1 ? "item" : "items"}
               </span>
             )}
           </SheetTitle>
@@ -104,7 +104,7 @@ export default function CartSheet({ open, onOpenChange }: CartSheetProps) {
                 <FiShoppingBag size={30} />
               </div>
               <p className="text-white/60 text-sm font-medium">
-                আপনার কার্ট বর্তমানে খালি আছে
+                Your cart is currently empty
               </p>
               <Button
                 type="button"
@@ -112,7 +112,7 @@ export default function CartSheet({ open, onOpenChange }: CartSheetProps) {
                 className="bg-[#FD6603] hover:bg-[#e55b03] text-white text-xs font-semibold px-6 rounded-full cursor-pointer"
                 size="sm"
               >
-                পণ্য দেখুন (Shop Now)
+                Shop Now
               </Button>
             </div>
           ) : (
@@ -128,14 +128,14 @@ export default function CartSheet({ open, onOpenChange }: CartSheetProps) {
         {items.length > 0 && (
           <div className="px-5 py-5 border-t border-white/10 bg-[#090909] space-y-3.5">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-white/60">মোট সাবটোটাল ({totalItems} টি পণ্য)</span>
+              <span className="text-white/60">Subtotal ({totalItems} {totalItems === 1 ? "item" : "items"})</span>
               <span className="text-white font-bold text-base sm:text-lg">
-                ৳ {totalPrice.toLocaleString()}
+                Tk {totalPrice.toLocaleString()}
               </span>
             </div>
             <div className="flex items-center justify-between text-xs text-white/50">
-              <span>ডেলিভারি চার্জ</span>
-              <span className="text-emerald-400 font-semibold">ফ্রি (Free)</span>
+              <span>Delivery</span>
+              <span className="text-emerald-400 font-semibold">Free</span>
             </div>
 
             <Link
@@ -143,12 +143,12 @@ export default function CartSheet({ open, onOpenChange }: CartSheetProps) {
               onClick={() => onOpenChange(false)}
               className="w-full flex items-center justify-center gap-2 bg-[#FD6603] hover:bg-[#e55b03] text-white font-bold py-3.5 rounded-xl text-sm transition-all duration-200 active:scale-95 shadow-md shadow-[#FD6603]/30"
             >
-              <span>অর্ডার সম্পন্ন করুন (Checkout)</span>
+              <span>Proceed to Checkout</span>
               <FiArrowRight size={16} />
             </Link>
 
             <p className="text-white/40 text-[11px] text-center">
-              ক্যাশ অন ডেলিভারি সুবিধা সহ নিরাপদ কেনাকাটা
+              Cash on Delivery available nationwide
             </p>
           </div>
         )}

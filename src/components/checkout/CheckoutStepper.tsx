@@ -5,9 +5,9 @@ import { FiShoppingCart, FiMapPin, FiCreditCard, FiCheck } from "react-icons/fi"
 import { cn } from "cn";
 
 const steps: { key: CheckoutStep; label: string; icon: React.ElementType }[] = [
-  { key: "cart", label: "কার্ট (Cart)", icon: FiShoppingCart },
-  { key: "address", label: "ঠিকানা (Address)", icon: FiMapPin },
-  { key: "payment", label: "পেমেন্ট (Payment)", icon: FiCreditCard },
+  { key: "cart", label: "Cart", icon: FiShoppingCart },
+  { key: "address", label: "Address", icon: FiMapPin },
+  { key: "payment", label: "Payment", icon: FiCreditCard },
 ];
 
 const stepOrder: CheckoutStep[] = ["cart", "address", "payment"];
