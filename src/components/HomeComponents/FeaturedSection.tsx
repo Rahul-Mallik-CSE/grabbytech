@@ -21,7 +21,7 @@ const highlights = [
   },
   {
     icon: FiRefreshCw,
-    title: "Easy 7-Day Replacement",
+    title: "Easy 3-Day Replacement",
     desc: "Hassle-free replacement guarantee if you encounter any manufacturer defects.",
   },
   {
