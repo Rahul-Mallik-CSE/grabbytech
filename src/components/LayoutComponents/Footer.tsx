@@ -49,7 +49,7 @@ export default function Footer() {
           {/* Brand Mark / Logo Section */}
           <div className="flex flex-col items-center md:items-start md:col-span-1">
             <Link href="/" className="inline-block mb-4">
-              <div className="relative h-14 w-14 overflow-hidden bg-transparent flex items-center justify-center p-1 shadow-lg">
+              <div className="relative h-20 md:h-24 w-20 md:w-24 margin-0  overflow-hidden bg-transparent flex items-center justify-center p-1 shadow-lg">
                 <Image
                   src="/grabbytechicon.jpg"
                   alt="GrabbyTech"
