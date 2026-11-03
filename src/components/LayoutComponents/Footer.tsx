@@ -26,7 +26,7 @@ const policyLinks = [
 const connectLinks = [
   { label: "Contact Us", href: "/contact" },
   { label: "Tutpara, Khulna", href: "#" },
-  { label: "Phone: +8801951755457", href: "tel:+8801951755457" },
+  { label: "Phone: +8801581028537", href: "tel:+8801581028537" },
   { label: "Email: Contact@grabbytech.com", href: "mailto:Contact@grabbytech.com" },
 ];
 

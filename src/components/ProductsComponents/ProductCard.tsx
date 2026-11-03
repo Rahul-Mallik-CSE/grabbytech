@@ -64,7 +64,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="group bg-[#0f0f0f] border border-white/10 hover:border-[#FD6603]/40 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-black/50">
       {/* Product Image Area */}
-      <div className="max-h-[130px] sm:max-h-[210px] relative aspect-square overflow-hidden bg-[#161616]">
+      <div className="max-h-[150px] sm:max-h-[230px] relative aspect-square overflow-hidden bg-[#161616]">
         <Link href={`/products/${product.slug}`} className="block w-full h-full">
           <Image
             src={product.images[imgIdx]?.url ?? product.images[0].url}
@@ -149,7 +149,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Title */}
         <Link href={`/products/${product.slug}`}>
-          <h3 className="text-white text-[10px] sm:text-sm font-medium line-clamp-2 leading-snug hover:text-[#FD6603] transition-colors min-h-[2.5rem]">
+          <h3 className="text-white text-[10px] sm:text-sm font-medium line-clamp-2 leading-snug hover:text-[#FD6603] transition-colors ">
             {product.name}
           </h3>
         </Link>
@@ -158,7 +158,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <StarRating rating={product.rating} count={product.reviewCount} />
 
         {/* Price Row (like 4th & 5th image) */}
-        <div className="flex items-baseline gap-2 mt-auto sm:pt-1">
+        <div className="flex items-baseline gap-2 mt-0 sm:pt-1">
           <span className="text-sm sm:text-base font-bold text-white">
             Tk {product.price.toLocaleString()}
           </span>
