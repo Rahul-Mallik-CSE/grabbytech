@@ -16,6 +16,7 @@ import {
 import { Product } from "@/types/AllTypes";
 import { useCartContext } from "@/context/CartContext";
 import { cn } from "cn";
+import ProductDetailTabs from "./ProductDetailTabs";
 
 interface ProductDetailViewProps {
   product: Product;
@@ -314,14 +315,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
         </div>
 
         {/* Detailed Description */}
-        <div className="mt-8 sm:mt-12 bg-white rounded-3xl border border-gray-200/80 p-6 sm:p-10">
-          <h2 className="text-lg sm:text-xl font-bold text-gray-950 mb-4 pb-3 border-b border-gray-100">
-            Product Description
-          </h2>
-          <p className="text-gray-700 text-xs sm:text-sm leading-relaxed whitespace-pre-line">
-            {product.description}
-          </p>
-        </div>
+        <ProductDetailTabs product={product} />
       </div>
     </div>
   );
