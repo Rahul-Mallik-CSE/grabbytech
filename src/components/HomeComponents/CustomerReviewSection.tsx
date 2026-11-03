@@ -20,14 +20,14 @@ export default function CustomerReviewSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {customerReviews.map((review) => (
             <div
               key={review.id}
-              className="bg-white rounded-3xl p-6 md:p-8 border border-gray-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow duration-300"
+              className="bg-white rounded-3xl p-4 md:p-6 border border-gray-200/80 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow duration-300"
             >
               <div>
-                <div className="flex items-center gap-1 mb-4">
+                <div className="flex items-center gap-1 mb-2 sm:mb-4">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <FiStar
                       key={i}
@@ -39,12 +39,12 @@ export default function CustomerReviewSection() {
                     />
                   ))}
                 </div>
-                <p className="text-gray-700 text-sm leading-relaxed mb-8 italic">
+                <p className="text-gray-700 text-sm leading-relaxed mb-2 sm:mb-4 italic">
                   "{review.comment}"
                 </p>
               </div>
               
-              <div className="flex items-center gap-4 pt-4 border-t border-gray-50">
+              <div className="flex items-center gap-4  border-t border-gray-50">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden bg-gray-100 border-2 border-white shadow-sm">
                   <Image
                     src={review.avatar}
