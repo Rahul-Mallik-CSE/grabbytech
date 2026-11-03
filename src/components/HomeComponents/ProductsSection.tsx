@@ -14,10 +14,10 @@ export default function ProductsSection() {
   const hasMore = products.length > INITIAL_LIMIT;
 
   return (
-    <section className="py-8 sm:py-12 bg-white">
+    <section className="py-6 sm:py-10 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex items-center justify-between gap-4 mb-6 sm:mb-8 pb-3 border-b border-gray-100">
+        <div className="flex items-center justify-between gap-4 mb-3 sm:mb-6 pb-1 sm:pb-3 border-b border-gray-100">
           <div>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#FD6603]" />

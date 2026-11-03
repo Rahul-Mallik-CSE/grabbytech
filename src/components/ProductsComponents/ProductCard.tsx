@@ -64,7 +64,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="group bg-[#0f0f0f] border border-white/10 hover:border-[#FD6603]/40 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-black/50">
       {/* Product Image Area */}
-      <div className="relative aspect-square overflow-hidden bg-[#161616]">
+      <div className="max-h-[130px] sm:max-h-[210px] relative aspect-square overflow-hidden bg-[#161616]">
         <Link href={`/products/${product.slug}`} className="block w-full h-full">
           <Image
             src={product.images[imgIdx]?.url ?? product.images[0].url}
@@ -143,13 +143,13 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Product Content Details */}
       <div className="p-3 sm:p-4 flex flex-col gap-2 flex-1">
         {/* Category Pill Tag (like 4th image) */}
-        <span className="inline-block text-[10px] font-medium text-white/50 bg-white/5 border border-white/10 px-2 py-0.5 rounded w-fit tracking-wide uppercase line-clamp-1">
+        <span className="hidden md:inline-block text-[10px] font-medium text-white/50 bg-white/5 border border-white/10 px-2 py-0.5 rounded w-fit tracking-wide uppercase line-clamp-1">
           {product.category}
         </span>
 
         {/* Title */}
         <Link href={`/products/${product.slug}`}>
-          <h3 className="text-white text-xs sm:text-sm font-medium line-clamp-2 leading-snug hover:text-[#FD6603] transition-colors min-h-[2.5rem]">
+          <h3 className="text-white text-[10px] sm:text-sm font-medium line-clamp-2 leading-snug hover:text-[#FD6603] transition-colors min-h-[2.5rem]">
             {product.name}
           </h3>
         </Link>
@@ -158,7 +158,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <StarRating rating={product.rating} count={product.reviewCount} />
 
         {/* Price Row (like 4th & 5th image) */}
-        <div className="flex items-baseline gap-2 mt-auto pt-1">
+        <div className="flex items-baseline gap-2 mt-auto sm:pt-1">
           <span className="text-sm sm:text-base font-bold text-white">
             Tk {product.price.toLocaleString()}
           </span>
@@ -170,14 +170,14 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* Two Action Buttons: Cart and Buy (like 4th image, styled with theme) */}
-        <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-white/10">
+        <div className="grid grid-cols-2 gap-2 sm:mt-2 sm:pt-2 border-t border-white/10">
           {/* Cart Button */}
           <button
             type="button"
             onClick={handleAddToCart}
             disabled={product.stock === 0}
             className={cn(
-              "flex items-center cursor-pointer justify-center gap-1.5 h-9 rounded-lg text-xs font-semibold border transition-all active:scale-95",
+              "flex items-center cursor-pointer justify-center gap-1.5 h-7 sm:h-9 rounded-lg text-[10px] sm:text-xs font-semibold border transition-all active:scale-95",
               product.stock === 0
                 ? "border-white/10 text-white/20 cursor-not-allowed"
                 : adding
@@ -204,7 +204,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             onClick={handleBuyNow}
             disabled={product.stock === 0}
             className={cn(
-              "flex items-center cursor-pointer justify-center h-9 rounded-lg text-xs font-semibold text-white transition-all active:scale-95 shadow-sm",
+              "flex items-center cursor-pointer justify-center h-7 sm:h-9 rounded-lg text-[10px] sm:text-xs font-semibold text-white transition-all active:scale-95 shadow-sm",
               product.stock === 0
                 ? "bg-white/10 text-white/30 cursor-not-allowed"
                 : "bg-[#FD6603] hover:bg-[#e55b03]"
