@@ -166,7 +166,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setCartOpen(true)}
               aria-label="Shopping Cart"
-              className="relative p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="hidden md:flex relative p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             >
               <FiShoppingCart size={20} />
               {totalItems > 0 && (
