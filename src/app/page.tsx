@@ -1,5 +1,6 @@
 import ProductsSection from "@/components/HomeComponents/ProductsSection";
 import FeaturedSection from "@/components/HomeComponents/FeaturedSection";
+import CustomerReviewSection from "@/components/HomeComponents/CustomerReviewSection";
 
 export default function HomePage() {
   return (
@@ -8,6 +9,8 @@ export default function HomePage() {
       <ProductsSection />
       {/* Extra static section */}
       <FeaturedSection />
+      {/* Customer review section */}
+      <CustomerReviewSection />
     </div>
   );
 }

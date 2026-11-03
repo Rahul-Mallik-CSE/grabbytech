@@ -91,3 +91,12 @@ export interface NavLink {
   href: string;
 }
 
+//customer review type
+export interface CustomerReview {
+  id: string;
+  name: string;
+  avatar: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
