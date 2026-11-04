@@ -21,7 +21,7 @@ const defaultFilters: FilterState = {
 };
 
 const toSlug = (value: string) =>
-  value.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  value.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 function getApiParams(filters: FilterState, search: string) {
   const ordering: Record<SortOption, string | undefined> = {

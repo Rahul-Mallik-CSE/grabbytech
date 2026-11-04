@@ -111,6 +111,20 @@ export default function AddressStep({ onNext, onBack }: AddressStepProps) {
             </div>
           </div>
 
+          <div className="space-y-1.5">
+            <label className="text-xs sm:text-sm font-bold text-gray-700">
+              Postal Code
+            </label>
+            <input
+              type="text"
+              inputMode="numeric"
+              placeholder="e.g. 1205"
+              value={form.postalCode}
+              onChange={(e) => setForm({ ...form, postalCode: e.target.value })}
+              className="w-full bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-[#FD6603] focus:ring-1 focus:ring-[#FD6603] transition-colors"
+            />
+          </div>
+
           {/* Email */}
           <div className="space-y-1.5">
             <label className="text-xs sm:text-sm font-bold text-gray-700">

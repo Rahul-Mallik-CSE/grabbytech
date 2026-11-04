@@ -12,7 +12,7 @@ import {
   FiTruck,
   FiShoppingBag,
 } from "react-icons/fi";
-import { useRouter } from "next/navigation";
+import { usePlaceGuestOrderMutation } from "@/redux/features/checkout/checkoutAPI";
 
 interface PaymentStepProps {
   address: CheckoutFormData;
@@ -24,18 +24,59 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
   const [placing, setPlacing] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderId, setOrderId] = useState("");
-  const router = useRouter();
+  const [placeGuestOrder] = usePlaceGuestOrderMutation();
+  const [orderError, setOrderError] = useState("");
 
   const handlePlaceOrder = async () => {
+    if (!items.length) return;
     setPlacing(true);
-    const generatedId = `GT-${Math.floor(100000 + Math.random() * 900000)}`;
-    setOrderId(generatedId);
-
-    // Simulate placing order
-    await new Promise((r) => setTimeout(r, 1200));
-    clearCart();
-    setPlacing(false);
-    setOrderPlaced(true);
+    setOrderError("");
+    try {
+      const response = await placeGuestOrder({
+        guest_name: address.fullName,
+        guest_phone: address.phone,
+        guest_email: address.email,
+        guest_shipping: {
+          full_name: address.fullName,
+          phone: address.phone,
+          division: "DHAKA",
+          district: address.district,
+          upazila: address.city,
+          address_line: address.address,
+          postal_code: address.postalCode,
+        },
+        payment_method: 1,
+        items: items.map(({ product, quantity }) => ({
+          product_id: product.id,
+          name: product.name,
+          quantity,
+          unit_price: product.price,
+          total_price: product.price * quantity,
+        })),
+      }).unwrap();
+      const serverOrderId = response.order_number ?? response.order_id ?? response.id;
+      setOrderId(serverOrderId ? String(serverOrderId) : "Submitted successfully");
+      clearCart();
+      setOrderPlaced(true);
+    } catch (error) {
+      const errorData =
+        typeof error === "object" && error !== null && "data" in error
+          ? (error as { data?: unknown }).data
+          : undefined;
+      const message =
+        typeof errorData === "object" && errorData !== null
+          ? ("detail" in errorData && typeof errorData.detail === "string"
+              ? errorData.detail
+              : "message" in errorData && typeof errorData.message === "string"
+                ? errorData.message
+                : Object.entries(errorData)
+                    .map(([field, value]) => `${field}: ${Array.isArray(value) ? value.join(", ") : String(value)}`)
+                    .join(" | ") || "The order could not be placed.")
+          : "The order could not be placed. Please try again.";
+      setOrderError(message);
+    } finally {
+      setPlacing(false);
+    }
   };
 
   if (orderPlaced) {
@@ -193,6 +234,11 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
         </div>
 
         {/* Action Buttons */}
+        {orderError && (
+          <p role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs font-medium text-red-600">
+            {orderError}
+          </p>
+        )}
         <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
           <button
             type="button"

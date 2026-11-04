@@ -87,8 +87,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-white">
+      <body className="min-h-full flex flex-col bg-white suppressHydrationWarning">
         <ReduxProvider>
           <CartProvider>
           <Suspense fallback={<div className="h-16 bg-black" />}>
