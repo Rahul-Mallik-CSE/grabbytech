@@ -16,6 +16,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.shopify.com",
       },
+      {
+        protocol: "http",
+        hostname: "grabbytech.com",
+      },
+      {
+        protocol: "https",
+        hostname: "grabbytech.com",
+      },
     ],
   },
   experimental: {

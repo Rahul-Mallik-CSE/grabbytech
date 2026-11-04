@@ -6,6 +6,7 @@ import Navbar from "@/components/LayoutComponents/Navbar";
 import Footer from "@/components/LayoutComponents/Footer";
 import MobileBottomNav from "@/components/LayoutComponents/MobileBottomNav";
 import { CartProvider } from "@/context/CartContext";
+import ReduxProvider from "@/redux/ReduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -88,7 +89,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white">
-        <CartProvider>
+        <ReduxProvider>
+          <CartProvider>
           <Suspense fallback={<div className="h-16 bg-black" />}>
             <Navbar />
           </Suspense>
@@ -97,7 +99,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Suspense fallback={null}>
             <MobileBottomNav />
           </Suspense>
-        </CartProvider>
+          </CartProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

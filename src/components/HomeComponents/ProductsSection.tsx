@@ -5,13 +5,16 @@ import Link from "next/link";
 import { FiArrowRight, FiGrid } from "react-icons/fi";
 import { products } from "@/data/productsdata";
 import ProductCard from "@/components/ProductsComponents/ProductCard";
+import { useGetProductsQuery } from "@/redux/features/products/productsAPI";
 
 const INITIAL_LIMIT = 10;
 
 export default function ProductsSection() {
   const [showAll, setShowAll] = useState(false);
-  const visibleProducts = showAll ? products : products.slice(0, INITIAL_LIMIT);
-  const hasMore = products.length > INITIAL_LIMIT;
+  const { data, isLoading, isError } = useGetProductsQuery({ page_size: 20 });
+  const apiProducts = data?.products ?? [];
+  const visibleProducts = showAll ? apiProducts : apiProducts.slice(0, INITIAL_LIMIT);
+  const hasMore = apiProducts.length > INITIAL_LIMIT;
 
   return (
     <section className="py-6 sm:py-10 bg-white">
@@ -42,9 +45,15 @@ export default function ProductsSection() {
 
         {/* Product Grid - 2 cols on mobile, up to 5 on wide screens */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
-          {visibleProducts.map((product) => (
+          {isLoading ? (
+            <p className="col-span-full py-16 text-center text-gray-500">Loading products...</p>
+          ) : isError ? (
+            <p className="col-span-full py-16 text-center text-red-500">Unable to load products.</p>
+          ) : visibleProducts.length ? visibleProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
-          ))}
+          )) : (
+            <p className="col-span-full py-16 text-center text-gray-500">No products found.</p>
+          )}
         </div>
 
         {/* See More Button: shown only if products.length > 10 */}

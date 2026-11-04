@@ -39,6 +39,48 @@ export interface Product {
   stock: number; // 0 = sold out
   badge?: "Sale" | "New" | "Hot" | "Sold Out";
   features: string[];
+  descriptionHtml?: string;
+  categorySlug?: string | null;
+  subcategory?: string | null;
+  subcategoryName?: string | null;
+  subcategorySlug?: string | null;
+  brandSlug?: string | null;
+  deliveryMode?: string;
+  deliveryFee?: number | null;
+  dhakaFee?: number | null;
+  deliverySummary?: {
+    mode: string;
+    mode_display: string;
+    delivery_fee: number | null;
+    dhaka_fee: number | null;
+  };
+  lowStockThreshold?: number;
+  isLowStock?: boolean;
+  isActive?: boolean;
+  warranty?: string;
+  weight?: string;
+  tags?: string;
+  colors?: ProductColor[];
+  variants?: ProductApiVariant[];
+  updatedAt?: string;
+}
+
+export interface ProductColor {
+  id: number;
+  name: string;
+  hexCode: string;
+  image: string | null;
+  priceAdjustment: string;
+  finalPrice: number;
+  quantity: number;
+  isActive: boolean;
+  order: number;
+}
+
+export interface ProductApiVariant {
+  id: number;
+  name?: string;
+  [key: string]: unknown;
 }
 
 export interface CartItem {

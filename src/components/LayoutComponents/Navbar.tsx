@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FiShoppingCart, FiUser, FiMenu, FiX, FiSearch } from "react-icons/fi";
 import CartSheet from "@/components/CartComponents/CartSheet";
 import { useCartContext } from "@/context/CartContext";
@@ -15,6 +15,7 @@ export default function Navbar() {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const pathname = usePathname();
+  const router = useRouter();
   const { totalItems } = useCartContext();
 
   const searchRef = useRef<HTMLDivElement>(null);
@@ -43,7 +44,7 @@ export default function Navbar() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
-    console.log("Searching for:", searchQuery);
+    router.push(`/collections?search=${encodeURIComponent(searchQuery.trim())}`);
     setMobileSearchOpen(false);
   };
 

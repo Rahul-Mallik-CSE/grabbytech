@@ -200,17 +200,31 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
             </p>
 
             {/* Feature Bullets */}
-            <div className="space-y-2 py-2 border-y border-gray-100">
-              <p className="text-xs font-bold text-gray-900 uppercase tracking-wide">
-                Key Features:
-              </p>
-              {product.features.map((f) => (
-                <div key={f} className="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
-                  <FiCheck size={15} className="text-[#FD6603] flex-shrink-0" />
-                  <span>{f}</span>
+            {product.features.length > 0 && (
+              <div className="space-y-2 py-2 border-y border-gray-100">
+                <p className="text-xs font-bold text-gray-900 uppercase tracking-wide">Key Features:</p>
+                {product.features.map((f) => (
+                  <div key={f} className="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
+                    <FiCheck size={15} className="text-[#FD6603] flex-shrink-0" />
+                    <span>{f}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {product.colors && product.colors.length > 0 && (
+              <div className="space-y-2">
+                <p className="text-xs font-bold uppercase tracking-wide text-gray-900">Available Colors</p>
+                <div className="flex flex-wrap gap-2">
+                  {product.colors.filter((color) => color.isActive).map((color) => (
+                    <span key={color.id} className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-3 py-1.5 text-xs text-gray-700">
+                      <span className="h-4 w-4 rounded-full border border-black/10" style={{ backgroundColor: color.hexCode }} />
+                      {color.name}
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
 
             {/* Stock Availability */}
             <div>
@@ -320,4 +334,3 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
     </div>
   );
 }
-

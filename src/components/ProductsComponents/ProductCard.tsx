@@ -65,7 +65,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     <div className="group bg-[#0f0f0f] border border-white/10 hover:border-[#FD6603]/40 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-black/50">
       {/* Product Image Area */}
       <div className="max-h-[150px] sm:max-h-[230px] relative aspect-square overflow-hidden bg-[#161616]">
-        <Link href={`/products/${product.slug}`} className="block w-full h-full">
+        <Link href={`/products/${product.id}`} className="block w-full h-full">
           <Image
             src={product.images[imgIdx]?.url ?? product.images[0].url}
             alt={product.images[imgIdx]?.alt ?? product.name}
@@ -108,7 +108,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Quick View Button on Hover */}
         <div className="hidden sm:flex absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center pointer-events-none">
           <Link
-            href={`/products/${product.slug}`}
+            href={`/products/${product.id}`}
             className="pointer-events-auto bg-black/80 hover:bg-black text-white text-xs font-medium px-3.5 py-1.5 rounded-full flex items-center gap-1.5 border border-white/20 backdrop-blur-sm transition-all active:scale-95"
           >
             <FiEye size={13} />
@@ -148,7 +148,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </span>
 
         {/* Title */}
-        <Link href={`/products/${product.slug}`}>
+        <Link href={`/products/${product.id}`}>
           <h3 className="text-white text-[10px] sm:text-sm font-medium line-clamp-2 leading-snug hover:text-[#FD6603] transition-colors ">
             {product.name}
           </h3>
