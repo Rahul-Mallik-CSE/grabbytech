@@ -13,6 +13,13 @@ import {
   FiShoppingBag,
 } from "react-icons/fi";
 import { usePlaceGuestOrderMutation } from "@/redux/features/checkout/checkoutAPI";
+import type {
+  GuestOrderItem,
+  GuestOrderResponse,
+} from "@/redux/features/checkout/checkoutAPI";
+import OrderDetailsPdf, {
+  OrderPdfData,
+} from "@/components/CheckoutComponents/OrderDetailsPdf";
 
 interface PaymentStepProps {
   address: CheckoutFormData;
@@ -24,6 +31,7 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
   const [placing, setPlacing] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderId, setOrderId] = useState("");
+  const [orderData, setOrderData] = useState<OrderPdfData | null>(null);
   const [placeGuestOrder] = usePlaceGuestOrderMutation();
   const [orderError, setOrderError] = useState("");
 
@@ -32,7 +40,14 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
     setPlacing(true);
     setOrderError("");
     try {
-      const response = await placeGuestOrder({
+      const orderItems: GuestOrderItem[] = items.map(({ product, quantity }) => ({
+        product_id: product.id,
+        name: product.name,
+        quantity,
+        unit_price: product.price,
+        total_price: product.price * quantity,
+      }));
+      const response: GuestOrderResponse = await placeGuestOrder({
         guest_name: address.fullName,
         guest_phone: address.phone,
         guest_email: address.email,
@@ -46,16 +61,11 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
           postal_code: address.postalCode,
         },
         payment_method: 1,
-        items: items.map(({ product, quantity }) => ({
-          product_id: product.id,
-          name: product.name,
-          quantity,
-          unit_price: product.price,
-          total_price: product.price * quantity,
-        })),
+        items: orderItems,
       }).unwrap();
       const serverOrderId = response.order_number ?? response.order_id ?? response.id;
       setOrderId(serverOrderId ? String(serverOrderId) : "Submitted successfully");
+      setOrderData({ response, customer: address, items: orderItems });
       clearCart();
       setOrderPlaced(true);
     } catch (error) {
@@ -119,12 +129,17 @@ export default function PaymentStep({ address, onBack }: PaymentStepProps) {
         </p>
 
         <div className="pt-2">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center gap-2 bg-[#FD6603] hover:bg-[#e55b03] text-white font-bold text-xs sm:text-sm px-8 py-3.5 rounded-full transition-all active:scale-95 shadow-md shadow-[#FD6603]/30"
-          >
-            <FiShoppingBag size={16} /> Back to Homepage
-          </Link>
+          {orderData && (
+            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <OrderDetailsPdf data={orderData} />
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FD6603] px-8 py-3.5 text-xs font-bold text-white shadow-md shadow-[#FD6603]/30 transition-all hover:bg-[#e55b03] active:scale-95"
+              >
+                <FiShoppingBag size={16} /> Back to Homepage
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     );

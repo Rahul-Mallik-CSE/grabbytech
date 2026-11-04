@@ -26,10 +26,15 @@ export interface GuestOrderPayload {
 }
 
 export interface GuestOrderResponse {
-  id?: string;
+  id: string;
   order_id?: string;
-  order_number?: string;
-  [key: string]: unknown;
+  order_number: string;
+  subtotal: string;
+  shipping_cost: string;
+  discount: string;
+  coupon_code: string;
+  notes: string;
+  guest_email: string;
 }
 
 export const checkoutApi = baseApi.injectEndpoints({
