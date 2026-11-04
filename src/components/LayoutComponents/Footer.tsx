@@ -31,11 +31,10 @@ const connectLinks = [
 ];
 
 const socials = [
-  { icon: FiFacebook, href: "https://facebook.com", label: "Facebook" },
-  { icon: FiInstagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: FiYoutube, href: "https://youtube.com", label: "YouTube" },
-  { icon: SiTiktok, href: "https://tiktok.com", label: "TikTok" },
-  { icon: FiTwitter, href: "https://twitter.com", label: "X" },
+  { icon: FiFacebook, href: "https://www.facebook.com/GrabbyTech", label: "Facebook" },
+  { icon: FiInstagram, href: "https://www.instagram.com/grabbytech?xtok=MWJyeDh1bndpd3V5Yg==", label: "Instagram" },
+  { icon: FiYoutube, href: "https://youtube.com/@grabbytech-bd?si=4QgkljXZIKPr621_", label: "YouTube" },
+  { icon: SiTiktok, href: "https://www.tiktok.com/@grabbytech?_r=1&_t=ZS-9B7nnqbkpsL", label: "TikTok" },
 ];
 
 export default function Footer() {
