@@ -7,6 +7,8 @@ import FilterPanel from "@/components/CollectionsComponents/FilterPanel";
 import FilterSheet from "@/components/CollectionsComponents/FilterSheet";
 import SortBar from "@/components/CollectionsComponents/SortBar";
 import ProductGrid from "@/components/ProductsComponents/ProductGrid";
+import { ProductGridSkeleton } from "@/components/ProductsComponents/ProductCardSkeleton";
+import FilterPanelSkeleton from "@/components/CollectionsComponents/FilterPanelSkeleton";
 import { useGetProductsQuery } from "@/redux/features/products/productsAPI";
 
 const defaultFilters: FilterState = {
@@ -46,8 +48,23 @@ function CollectionsContent() {
   const search = searchParams.get("search") ?? "";
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
   const params = useMemo(() => getApiParams(filters, search), [filters, search]);
+  const { data: categoryData, isLoading: isCategoryLoading } = useGetProductsQuery({
+    search: search || undefined,
+    page_size: 20,
+  });
   const { data, isLoading, isError } = useGetProductsQuery(params);
   const products = data?.products ?? [];
+  const categories = useMemo(
+    () => Array.from(new Set((categoryData?.products ?? []).map((product) => product.category).filter(Boolean))).sort(),
+    [categoryData?.products]
+  );
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { All: categoryData?.count ?? 0 };
+    for (const product of categoryData?.products ?? []) {
+      counts[product.category] = (counts[product.category] ?? 0) + 1;
+    }
+    return counts;
+  }, [categoryData]);
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20 md:pb-12">
@@ -62,19 +79,21 @@ function CollectionsContent() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-6 md:hidden">
           <div className="flex items-center justify-between gap-2">
-            <FilterSheet filters={filters} onChange={setFilters} />
+            <FilterSheet filters={filters} onChange={setFilters} categories={categories} categoryCounts={categoryCounts} isLoading={isCategoryLoading} />
             <span className="text-xs text-gray-500 font-medium">Products: <b className="text-gray-900">{data?.count ?? 0}</b></span>
           </div>
           <SortBar filters={filters} onChange={setFilters} count={data?.count ?? 0} />
         </div>
         <div className="flex items-start gap-8">
           <aside className="hidden md:block w-72 flex-shrink-0">
-            <div className="sticky top-20"><FilterPanel filters={filters} onChange={setFilters} /></div>
+            <div className="sticky top-20">
+              {isCategoryLoading ? <FilterPanelSkeleton /> : <FilterPanel filters={filters} onChange={setFilters} categories={categories} categoryCounts={categoryCounts} />}
+            </div>
           </aside>
           <div className="flex-1 min-w-0">
             <div className="hidden md:block mb-5"><SortBar filters={filters} onChange={setFilters} count={data?.count ?? 0} /></div>
             {isLoading ? (
-              <p className="py-20 text-center text-gray-500">Loading products...</p>
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 md:gap-5"><ProductGridSkeleton count={6} /></div>
             ) : isError ? (
               <p className="py-20 text-center text-red-500">Unable to load products. Please try again.</p>
             ) : (

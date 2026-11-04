@@ -14,14 +14,7 @@ export interface ProductVariant {
   stock: number;
 }
 
-export type ProductCategory =
-  | "Electrical Equipment & Supplies"
-  | "Exercise & Gymnastic Tools"
-  | "Gadget & Accessories"
-  | "Health & Medial"
-  | "Home Appliances"
-  | "Home & Garden"
-  | "Safety & Security";
+export type ProductCategory = string;
 
 export interface Product {
   id: string;

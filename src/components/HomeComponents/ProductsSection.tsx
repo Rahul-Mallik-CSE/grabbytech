@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FiArrowRight, FiGrid } from "react-icons/fi";
-import { products } from "@/data/productsdata";
 import ProductCard from "@/components/ProductsComponents/ProductCard";
+import { ProductGridSkeleton } from "@/components/ProductsComponents/ProductCardSkeleton";
 import { useGetProductsQuery } from "@/redux/features/products/productsAPI";
 
 const INITIAL_LIMIT = 10;
@@ -46,7 +46,7 @@ export default function ProductsSection() {
         {/* Product Grid - 2 cols on mobile, up to 5 on wide screens */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
           {isLoading ? (
-            <p className="col-span-full py-16 text-center text-gray-500">Loading products...</p>
+            <ProductGridSkeleton count={8} />
           ) : isError ? (
             <p className="col-span-full py-16 text-center text-red-500">Unable to load products.</p>
           ) : visibleProducts.length ? visibleProducts.map((product) => (
@@ -64,7 +64,7 @@ export default function ProductsSection() {
               onClick={() => setShowAll((prev) => !prev)}
               className="inline-flex items-center justify-center gap-2 bg-[#FD6603] hover:bg-[#e55b03] text-white font-bold text-xs sm:text-sm px-8 py-3.5 rounded-full transition-all duration-200 active:scale-95 shadow-md shadow-[#FD6603]/25 cursor-pointer"
             >
-              <span>{showAll ? "Show Less" : `See More Products (${products.length - INITIAL_LIMIT}+ More)`}</span>
+              <span>{showAll ? "Show Less" : `See More Products (${apiProducts.length - INITIAL_LIMIT}+ More)`}</span>
               <FiArrowRight
                 size={16}
                 className={showAll ? "-rotate-90 transition-transform" : "transition-transform"}

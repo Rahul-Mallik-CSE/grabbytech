@@ -1,26 +1,18 @@
 "use client";
 
-import { FilterState, ProductCategory } from "@/types/AllTypes";
-import { CATEGORIES, BRANDS, products } from "@/data/productsdata";
+import { FilterState } from "@/types/AllTypes";
+import { BRANDS, products } from "@/data/productsdata";
 import { cn } from "cn";
 import { FiSliders, FiRotateCcw } from "react-icons/fi";
 
 interface FilterPanelProps {
   filters: FilterState;
   onChange: (f: FilterState) => void;
+  categories: string[];
+  categoryCounts: Record<string, number>;
 }
 
-function getCategoryCount(category: string) {
-  if (category === "All") return products.length;
-  return products.filter((p) => p.category === category).length;
-}
-
-function getBrandCount(brand: string) {
-  if (brand === "All") return products.length;
-  return products.filter((p) => p.brand === brand).length;
-}
-
-export default function FilterPanel({ filters, onChange }: FilterPanelProps) {
+export default function FilterPanel({ filters, onChange, categories, categoryCounts }: FilterPanelProps) {
   const set = (partial: Partial<FilterState>) =>
     onChange({ ...filters, ...partial });
 
@@ -56,17 +48,15 @@ export default function FilterPanel({ filters, onChange }: FilterPanelProps) {
       <div>
         <h4 className="text-gray-900 font-bold text-sm mb-3">Category</h4>
         <ul className="space-y-1">
-          {CATEGORIES.map((cat) => {
+          {["All", ...categories].map((cat) => {
             const active = filters.category === cat;
             const displayName = cat === "All" ? "All Categories" : cat;
-            const count = getCategoryCount(cat);
-
             return (
               <li key={cat}>
                 <button
                   type="button"
                   onClick={() =>
-                    set({ category: cat as ProductCategory | "All" })
+                    set({ category: cat })
                   }
                   className={cn(
                     "w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs sm:text-sm transition-all text-left",
@@ -82,7 +72,7 @@ export default function FilterPanel({ filters, onChange }: FilterPanelProps) {
                       active ? "bg-white/15 text-white" : "text-gray-400"
                     )}
                   >
-                    {count}
+                    {categoryCounts[cat] ?? 0}
                   </span>
                 </button>
               </li>
@@ -112,7 +102,9 @@ export default function FilterPanel({ filters, onChange }: FilterPanelProps) {
           {BRANDS.map((brand) => {
             const active = filters.brand === brand;
             const displayName = brand === "All" ? "All Brands" : brand;
-            const count = getBrandCount(brand);
+            const count = brand === "All"
+              ? categoryCounts.All ?? 0
+              : products.filter((product) => product.brand === brand).length;
 
             return (
               <li key={brand}>

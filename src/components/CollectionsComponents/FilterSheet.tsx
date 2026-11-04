@@ -10,14 +10,18 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import FilterPanel from "./FilterPanel";
+import FilterPanelSkeleton from "./FilterPanelSkeleton";
 import { FilterState } from "@/types/AllTypes";
 
 interface FilterSheetProps {
   filters: FilterState;
   onChange: (f: FilterState) => void;
+  categories: string[];
+  categoryCounts: Record<string, number>;
+  isLoading?: boolean;
 }
 
-export default function FilterSheet({ filters, onChange }: FilterSheetProps) {
+export default function FilterSheet({ filters, onChange, categories, categoryCounts, isLoading = false }: FilterSheetProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -36,12 +40,16 @@ export default function FilterSheet({ filters, onChange }: FilterSheetProps) {
           </SheetTitle>
         </SheetHeader>
         <div className="p-4">
-          <FilterPanel
-            filters={filters}
-            onChange={(f) => {
-              onChange(f);
-            }}
-          />
+          {isLoading ? (
+            <FilterPanelSkeleton />
+          ) : (
+            <FilterPanel
+              filters={filters}
+              onChange={onChange}
+              categories={categories}
+              categoryCounts={categoryCounts}
+            />
+          )}
         </div>
       </SheetContent>
     </Sheet>
