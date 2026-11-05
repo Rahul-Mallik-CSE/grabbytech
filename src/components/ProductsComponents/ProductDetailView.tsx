@@ -106,6 +106,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                 src={product.images[activeImg]?.url || product.images[0].url}
                 alt={product.images[activeImg]?.alt || product.name}
                 fill
+                loading="lazy"
                 className="object-cover transition-all duration-300"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority

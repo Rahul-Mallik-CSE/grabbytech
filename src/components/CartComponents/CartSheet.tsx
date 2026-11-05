@@ -29,6 +29,7 @@ function CartItemRow({ item }: { item: CartItem }) {
           src={product.images[0]?.url || ""}
           alt={product.images[0]?.alt || product.name}
           fill
+          loading="lazy"
           className="object-cover"
           sizes="64px"
         />

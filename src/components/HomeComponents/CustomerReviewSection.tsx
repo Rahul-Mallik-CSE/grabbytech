@@ -50,6 +50,7 @@ export default function CustomerReviewSection() {
                     src={review.avatar}
                     alt={review.name}
                     fill
+                    loading="lazy"
                     className="object-cover"
                     sizes="48px"
                   />

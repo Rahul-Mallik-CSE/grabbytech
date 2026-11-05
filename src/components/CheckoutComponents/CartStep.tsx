@@ -64,6 +64,7 @@ export default function CartStep({ onNext }: CartStepProps) {
                   src={product.images[0]?.url || ""}
                   alt={product.name}
                   fill
+                  loading="lazy"
                   className="object-cover"
                   sizes="96px"
                 />

@@ -63,7 +63,7 @@ function ReviewModal({ product, onClose }: { product: Product; onClose: () => vo
         <h2 className="mb-6 text-2xl font-light text-gray-800">Write a review</h2>
         <div className="mb-6 flex items-center gap-4">
           <div className="relative h-16 w-16 overflow-hidden rounded-lg bg-gray-100">
-            <Image src={product.images[0]?.url ?? "/grabbytechLogo.jpg"} alt={product.name} fill className="object-cover" />
+            <Image loading="lazy" src={product.images[0]?.url ?? "/grabbytechLogo.jpg"} alt={product.name} fill className="object-cover" />
           </div>
           <p className="font-medium text-gray-700">{product.name}</p>
         </div>
