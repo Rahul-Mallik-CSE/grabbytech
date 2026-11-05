@@ -65,13 +65,14 @@ export default function ProductCard({ product }: ProductCardProps) {
     <div className="group bg-[#0f0f0f] border border-white/10 hover:border-[#FD6603]/40 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-black/50">
       {/* Product Image Area */}
       <div className="max-h-[150px] sm:max-h-[230px] relative aspect-square overflow-hidden bg-[#161616]">
-        <Link href={`/products/${product.id}`} className="block w-full h-full">
+        <Link href={`/products/${product.id}`} className="relative block w-full h-full">
           <Image
             src={product.images[imgIdx]?.url ?? product.images[0].url}
             alt={product.images[imgIdx]?.alt ?? product.name}
-            fill
+            width={600}
+            height={600}
             loading="eager"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         </Link>
