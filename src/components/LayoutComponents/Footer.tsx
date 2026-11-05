@@ -53,6 +53,7 @@ export default function Footer() {
                   src="/grabbytechicon.jpg"
                   alt="GrabbyTech"
                   fill
+                  sizes="96px"
                   className="object-cover"
                 />
               </div>

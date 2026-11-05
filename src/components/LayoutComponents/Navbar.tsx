@@ -72,6 +72,7 @@ export default function Navbar() {
                   src="/grabbytechLogo.jpg"
                   alt="GrabbyTech"
                   fill
+                  sizes="144px"
                   className="object-contain object-left"
                   priority
                 />
@@ -88,6 +89,7 @@ export default function Navbar() {
                   src="/grabbytechLogo.jpg"
                   alt="GrabbyTech"
                   fill
+                  sizes="128px"
                   className="object-contain object-center"
                   priority
                 />
