@@ -4,10 +4,27 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FiShoppingCart, FiUser, FiMenu, FiX, FiSearch } from "react-icons/fi";
+import {
+  FiFacebook,
+  FiInstagram,
+  FiShoppingCart,
+  FiUser,
+  FiMenu,
+  FiX,
+  FiSearch,
+  FiYoutube,
+} from "react-icons/fi";
+import { SiTiktok } from "react-icons/si";
 import CartSheet from "@/components/CartComponents/CartSheet";
 import { useCartContext } from "@/context/CartContext";
 import { cn } from "cn";
+
+const socials = [
+  { icon: FiFacebook, href: "https://www.facebook.com/GrabbyTech", label: "Facebook" },
+  { icon: FiInstagram, href: "https://www.instagram.com/grabbytech?xtok=MWJyeDh1bndpd3V5Yg==", label: "Instagram" },
+  { icon: FiYoutube, href: "https://youtube.com/@grabbytech-bd?si=4QgkljXZIKPr621_", label: "YouTube" },
+  { icon: SiTiktok, href: "https://www.tiktok.com/@grabbytech?_r=1&_t=ZS-9B7nnqbkpsL", label: "TikTok" },
+];
 
 export default function Navbar() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -261,7 +278,7 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Bottom section: Profile Button */}
+            {/* Bottom section: Profile Button & Social Links */}
             <div className="pt-6 border-t border-white/10">
               <button
                 type="button"
@@ -271,6 +288,21 @@ export default function Navbar() {
                 <FiUser size={20} />
                 <span>Profile</span>
               </button>
+
+              <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-white/10">
+                {socials.map(({ icon: Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="text-white/70 hover:text-[#FD6603] transition-colors p-1"
+                  >
+                    <Icon size={20} />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
