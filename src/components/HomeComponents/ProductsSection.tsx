@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import Link from "next/link";
+import { io } from "next/cache";
 import { FiArrowRight, FiGrid } from "react-icons/fi";
 import ProductCard from "@/components/ProductsComponents/ProductCard";
 import { ProductGridSkeleton } from "@/components/ProductsComponents/ProductCardSkeleton";
@@ -10,6 +11,7 @@ import { useGetProductsQuery } from "@/redux/features/products/productsAPI";
 const INITIAL_LIMIT = 10;
 
 export default function ProductsSection() {
+  use(io());
   const [showAll, setShowAll] = useState(false);
   const { data, isLoading, isError } = useGetProductsQuery({ page_size: 20 });
   const apiProducts = data?.products ?? [];
