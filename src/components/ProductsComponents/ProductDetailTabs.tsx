@@ -29,6 +29,30 @@ function Stars({ rating, size = 18 }: { rating: number; size?: number }) {
 function ReviewModal({ product, onClose }: { product: Product; onClose: () => void }) {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const submitReview = async () => {
+    setSubmitting(true);
+    setError("");
+    try {
+      const response = await fetch("/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productName: product.name, productId: product.id, rating, review, name, email }),
+      });
+      const result = (await response.json()) as { error?: string; message?: string };
+      if (!response.ok) throw new Error(result.error || "Unable to submit your review.");
+      setSuccess(result.message || "Your review has been submitted.");
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : "Unable to submit your review.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
@@ -54,10 +78,12 @@ function ReviewModal({ product, onClose }: { product: Product; onClose: () => vo
         <label className="mb-2 block text-sm text-gray-600" htmlFor="review">Review</label>
         <textarea id="review" value={review} onChange={(event) => setReview(event.target.value)} maxLength={2000} placeholder="Share your feedback with us now" className="mb-5 min-h-40 w-full resize-none rounded-lg border border-gray-300 p-4 outline-none focus:border-[#FD6603]" />
         <label className="mb-2 block text-sm text-gray-600" htmlFor="review-name">Your name</label>
-        <input id="review-name" className="mb-5 w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-[#FD6603]" />
+        <input id="review-name" value={name} onChange={(event) => setName(event.target.value)} className="mb-5 w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-[#FD6603]" />
         <label className="mb-2 block text-sm text-gray-600" htmlFor="review-email">Your email</label>
-        <input id="review-email" type="email" className="mb-6 w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-[#FD6603]" />
-        <button type="button" disabled={!rating || !review.trim()} onClick={onClose} className="w-full rounded-lg bg-gray-900 py-3 font-bold text-white disabled:bg-gray-300">Submit review</button>
+        <input id="review-email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} className="mb-6 w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-[#FD6603]" />
+        {error && <p role="alert" className="mb-4 text-sm text-red-500">{error}</p>}
+        {success && <p role="status" className="mb-4 text-sm text-emerald-600">{success}</p>}
+        <button type="button" disabled={submitting || !rating || !review.trim() || !name.trim() || !email.trim()} onClick={submitReview} className="w-full rounded-lg bg-gray-900 py-3 font-bold text-white disabled:bg-gray-300">{submitting ? "Submitting..." : "Submit review"}</button>
       </div>
     </div>
   );

@@ -158,7 +158,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <StarRating rating={product.rating} count={product.reviewCount} />
 
         {/* Price Row (like 4th & 5th image) */}
-        <div className="flex items-baseline gap-2 mt-0 sm:pt-1">
+        <div className="flex items-baseline gap-2 mt-0 sm:pt-1 sm:mb-2">
           <span className="text-sm sm:text-base font-bold text-white">
             Tk {product.price.toLocaleString()}
           </span>
@@ -170,7 +170,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* Two Action Buttons: Cart and Buy (like 4th image, styled with theme) */}
-        <div className="grid grid-cols-2 gap-2 sm:mt-2 sm:pt-2 border-t border-white/10">
+        <div className="grid grid-cols-2 gap-2 sm:mt-auto sm:pt-2 border-t border-white/10">
           {/* Cart Button */}
           <button
             type="button"
